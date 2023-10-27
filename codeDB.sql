@@ -29,8 +29,6 @@ order_price int,
 phoneNumber nvarchar(50)
 )
 
-select *
-from product 
 insert into account
 values('admin', CONVERT(VARCHAR(32), HashBytes('MD5', 'admin'), 2), 'thinhldce171774@fpt.edu.vn'),
 ('user', CONVERT(VARCHAR(32), HashBytes('MD5', '123456'), 2), 'userforprj301@gmail.com')

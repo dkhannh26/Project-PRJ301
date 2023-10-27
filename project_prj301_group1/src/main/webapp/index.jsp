@@ -12,7 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Home</h1>
+        <h1>Home ${username}</h1>
         <a href="login.jsp"> Login </a>
+        
     </body>
 </html>

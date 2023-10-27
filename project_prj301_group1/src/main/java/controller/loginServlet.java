@@ -5,12 +5,20 @@
 
 package controller;
 
+import DAO.DAOaccount;
+import entity.account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 /**
  *
@@ -41,6 +49,32 @@ public class loginServlet extends HttpServlet {
             out.println("</html>");
         }
     } 
+    
+    
+     public static String getMd5(String input) {
+        try {
+
+            // Static getInstance method is called with hashing MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+
+            // digest() method is called to calculate message digest
+            // of an input digest() return array of byte
+            byte[] messageDigest = md.digest(input.getBytes());
+
+            // Convert byte array into signum representation
+            BigInteger no = new BigInteger(1, messageDigest);
+
+            // Convert message digest into hex value
+            String hashtext = no.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        } // For specifying wrong message digest algorithms
+        catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -66,7 +100,46 @@ public class loginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        
+        
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String message = "";
+       
+        
+        DAOaccount account = new DAOaccount();
+        List<account> list = account.getAll();
+      
+
+        String md5 = getMd5(password).toUpperCase();
+        boolean isEmpty = true;
+        for (account account1 : list) {
+            if (username.equals(account1.getUsername()) && md5.equals(account1.getPassword())) {
+            
+                
+                HttpSession session = request.getSession();
+                session.setAttribute("username", username);
+                
+                
+                isEmpty = false;
+                
+                Cookie u = new Cookie("userC", username);
+                Cookie p = new Cookie("passC", password);
+                u.setMaxAge(60*60*24*3);
+                p.setMaxAge(60*60*24*3);
+                response.addCookie(u);
+                response.addCookie(p);
+                
+                
+                response.sendRedirect("homeServlet");
+            }
+        }
+        if (isEmpty) {
+            message = "<div style=\"color: red;\">Wrong email or password.</div>";
+            request.setAttribute("ms", message);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
+
     }
 
     /** 

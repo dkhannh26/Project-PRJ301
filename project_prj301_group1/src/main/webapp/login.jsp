@@ -14,24 +14,25 @@
     <body>
     <center>
         <h1>Login form</h1><br><br><br>
-        <form action="loginServlet" id="loginForm">
+        <form action="loginServlet" id="loginForm" method="post">
 
 
             <div class="form-group invalid">
 
                 <i class="input-icon uil uil-at"></i>
-                <input class="form-style" value="${username}" type="text" placeholder="User" name="username" id="username" required>
+                <input class="form-style" type="text" placeholder="User" name="username" id="username" required>
 
             </div>
             <div class="form-group mt-2 invalid">
                 <i class="input-icon uil uil-lock-alt"></i>
-                <input type="password" class="form-style" value="${password}" placeholder="Password" name="password" required>
+                <input type="password" class="form-style"  placeholder="Password" name="password" required>
             </div>
-            ${ms}
+            ${message}
             <button class="btn mt-4" type="submit">Login</button>
             <p class="mb-0 mt-4 text-center"><a href="Forget.jsp"
                                                 class="link">Forgot your password?</a></p>
         </form>
+            
 
     </center>
 </body>

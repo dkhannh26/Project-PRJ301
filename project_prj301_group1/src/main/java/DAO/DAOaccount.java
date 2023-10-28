@@ -56,6 +56,19 @@ public class DAOaccount extends connectDB {
 
     }
 
+    public void updatePassword(String user, String pass) {
+        String sql = "update account\n"
+                + "set [password] = ?\n"
+                + "where username = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, pass);
+            ps.setString(2, user);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
     public account getAccountByUserName(String username) {
 
         String sql = "select * from account where username=?";
@@ -65,7 +78,7 @@ public class DAOaccount extends connectDB {
             st.setString(1, username);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                 account a = new account(rs.getString("username"),
+                account a = new account(rs.getString("username"),
                         rs.getString("password"), rs.getString("email"));
                 return a;
             }
@@ -75,12 +88,10 @@ public class DAOaccount extends connectDB {
         return null;
     }
 
-
     public static void main(String[] args) {
         DAOaccount account = new DAOaccount();
         List<account> listAccount = account.getAll();
         System.out.println(listAccount.get(0).toString());
-
 
     }
 }

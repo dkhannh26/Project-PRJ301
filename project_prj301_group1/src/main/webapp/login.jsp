@@ -293,7 +293,9 @@
                         <label>Password</label>
                     </div>
                     ${message}
-                    <div class="pass">Forget Password?</div>
+                    <div class="pass" >         
+                        <a href="forget.jsp">Forget Password?</a>
+                        </div>
                     <input name="submit" type="Submit" value="Login">
                     <div class="signup_link">
                         Not a Member ? <a href="signup.php">Signup</a>

@@ -1,0 +1,10 @@
+DAO\DAOproduct.class
+entity\product.class
+controller\addProduct.class
+controller\loginServlet.class
+entity\account.class
+controller\deleteProduct.class
+DAO\DAOaccount.class
+connnectDB\connectDB.class
+controller\home.class
+controller\productList.class

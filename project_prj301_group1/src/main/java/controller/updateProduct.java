@@ -5,19 +5,22 @@
 
 package controller;
 
+import DAO.DAOproduct;
+import entity.product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author LENOVO
  */
-public class home extends HttpServlet {
+@WebServlet(name = "updateProduct", urlPatterns = "/updateProduct")
+public class updateProduct extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -34,10 +37,10 @@ public class home extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet home</title>");  
+            out.println("<title>Servlet updateProducr</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet home at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet updateProducr at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -54,18 +57,12 @@ public class home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-//        processRequest(request, response);
-          HttpSession session = request.getSession();
-          String email = (String) session.getAttribute("email");
-          request.setAttribute("email", email);
-          String homeMenu = "padding-left: 40px;";
-          request.setAttribute("homeMenu", homeMenu);
-          String logOutBtn = "<a href =\"\" >Log out</a>";
-          request.setAttribute("logOutBtn", logOutBtn);
-          String style ="style=\"display:none;\"";
-          request.setAttribute("style", style);
-          request.getRequestDispatcher("index.jsp").forward(request, response);
-          
+        String pro_id = request.getParameter("pro_id");
+        DAOproduct dao = new DAOproduct();
+
+        product c = dao.getProductById(pro_id);
+        request.setAttribute("product", c);
+        request.getRequestDispatcher("updateProduct.jsp").forward(request, response);
     } 
 
     /** 
@@ -78,7 +75,48 @@ public class home extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+//          <td>${product.getType()}</td>
+//                     <td>${product.getPro_quan()}</td>
+//                    <td>${product.getPro_id()}</td>
+//                    <td>${product.getPro_name()}</td>
+//                    <td>${product.getPro_sale()}</td>
+//                    <td>${product.getPro_price()}</td>
+//                    <td> <img src="${product.getPro_pic()}" alt="alt"/></td>
+//                    <td>${product.getPro_des()}</td>-->
+        
+           try {
+            String type = request.getParameter("type");
+            String pro_quan = request.getParameter("pro_quan");
+            String pro_id = request.getParameter("pro_id");
+            String pro_name = request.getParameter("pro_name");
+            String pro_sale = request.getParameter("pro_price");
+            String pro_price = request.getParameter("pro_price");
+            String pro_pic = request.getParameter("pro_pic");
+            String pro_des = request.getParameter("pro_des");
+
+            DAOproduct dao = new DAOproduct();
+            int pro_quanInt = Integer.parseInt(pro_quan);
+            int pro_priceInt = Integer.parseInt(pro_price);
+            int pro_idInt = Integer.parseInt(pro_id);
+            int typeInt = Integer.parseInt(type);
+            int pro_saleInt = Integer.parseInt(pro_sale);
+            
+//            product p = dao.getProductById(pro_id);
+//            PrintWriter out = response.getWriter();
+
+//            out.print("<h1>zxc</h1>");
+            product prod = new product(typeInt, pro_quanInt, pro_idInt, pro_name, 
+                    pro_saleInt, pro_priceInt, pro_pic, pro_des);
+            dao.update(prod);
+
+//                out.print("<h1>zxc</h1>");
+//                request.getRequestDispatcher("list.jsp").forward(request, response);
+            response.sendRedirect("productList");
+
+        } catch (IOException ex) {
+
+        }
+
     }
 
     /** 

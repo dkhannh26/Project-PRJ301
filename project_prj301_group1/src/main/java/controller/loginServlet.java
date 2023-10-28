@@ -107,10 +107,10 @@ public class loginServlet extends HttpServlet {
         boolean isEmpty = true;
         for (account account1 : list) {
             if (username.equals(account1.getUsername()) && md5.equals(account1.getPassword())) {
-            
+                String email = account1.getEmail();
                 
                 HttpSession session = request.getSession();
-                session.setAttribute("username", username);
+                session.setAttribute("email", email);
                 
                 
                 isEmpty = false;

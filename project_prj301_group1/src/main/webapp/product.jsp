@@ -52,7 +52,7 @@
                     <td> <img src="${product.getPro_pic()}" alt="alt"/></td>
                     <td>${product.getPro_des()}</td>
                     <td>
-                        <a href ="update?id=${product.getPro_id()}">Update</a>
+                        <a href ="updateProduct?pro_id=${product.getPro_id()}">Update</a>
                         <a href="#" onclick="doDelete('${product.getPro_id()}')">Delete </a> 
                         <!--<a href ="order?name=&proID=">Order</a>-->
 

@@ -24,7 +24,7 @@ public class DAOproduct extends connnectDB.connectDB {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                product p = new product(rs.getInt("type"),rs.getInt("pro_quan"), rs.getInt("pro_id"), rs.getString("pro_name"),
+                product p = new product(rs.getInt("type"), rs.getInt("pro_quan"), rs.getInt("pro_id"), rs.getString("pro_name"),
                         rs.getInt("pro_sale"), rs.getInt("pro_price"), rs.getString("pro_pic"), rs.getString("pro_des"));
                 list.add(p);
             }
@@ -77,22 +77,25 @@ public class DAOproduct extends connnectDB.connectDB {
     }
 
     public void update(product p) {
-        String sql = "UPDATE [dbo].[Product]\n"
-                + "   SET [pro_name] = ?\n"
+        String sql = "UPDATE [dbo].[product]\n"
+                + "   SET [type] = ?\n"
                 + "      ,[pro_quan] = ?\n"
+                + "      ,[pro_name] = ?\n"
+                + "      ,[pro_sale] = ?\n"
                 + "      ,[pro_price] = ?\n"
                 + "      ,[pro_pic] = ?\n"
                 + "      ,[pro_des] = ?\n"
-                + " WHERE pro_id = ?";
+                + " WHERE pro_id=?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-             st.setInt(1, p.getType());
-            st.setInt(2, p.getPro_id());
+            st.setInt(1, p.getType());
+            st.setInt(2, p.getPro_quan());
             st.setString(3, p.getPro_name());
             st.setInt(4, p.getPro_sale());
             st.setInt(5, p.getPro_price());
             st.setString(6, p.getPro_pic());
             st.setString(7, p.getPro_des());
+            st.setInt(8, p.getPro_id());
             st.executeUpdate();
         } catch (Exception e) {
         }
@@ -120,7 +123,7 @@ public class DAOproduct extends connnectDB.connectDB {
             st.setString(1, id);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                product p = new product(rs.getInt("type"),rs.getInt("pro_quan"), rs.getInt("pro_id"), rs.getString("pro_name"),
+                product p = new product(rs.getInt("type"), rs.getInt("pro_quan"), rs.getInt("pro_id"), rs.getString("pro_name"),
                         rs.getInt("pro_sale"), rs.getInt("pro_price"), rs.getString("pro_pic"), rs.getString("pro_des"));
                 return p;
             }

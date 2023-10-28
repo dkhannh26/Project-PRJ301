@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-        <link rel="stylesheet" href="./login.css">
+    
 
         <title>Login</title>
 
@@ -136,16 +136,13 @@
                 pointer-events: none;
             }
 
-            .txt_field input:focus~label,
-            .txt_field input:valid~label {
+            .txt_field input:focus~.label,
+            .txt_field input:valid~.label {
                 top: -5px;
                 color: #2691d9;
             }
 
-            .txt_field input:focus~span::before,
-            .txt_field input:Valid~span::before {
-                width: 100%;
-            }
+           
 
             .pass {
                 margin: -5px 0 20px 5px;
@@ -236,7 +233,11 @@
                 background-color: #c0c0c0;
                 padding: 15px;
             }
-
+            #username-error, #password-error {
+                display: block;
+                transform: translateY(30px);
+                color: red;
+            }
         </style>
     </head>
 
@@ -281,16 +282,16 @@
         <div class="container">
             <div class="center">
                 <h1>Login</h1>
-                <form action="loginServlet" method="POST">
+                <form action="loginServlet" method="POST" id="addForm">
                     <div class="txt_field">
                         <input type="text" placeholder="User" name="username" id="username" required>
                         <span></span>
-                        <label>Username</label>
+                        <label class="label">Username</label>
                     </div>
                     <div class="txt_field">
                         <input type="password"  placeholder="Password" name="password" required>
                         <span></span>
-                        <label>Password</label>
+                        <label class="label">Password</label>
                     </div>
                     ${message}
                     <div class="pass">Forget Password?</div>
@@ -456,6 +457,12 @@
                 <a style="color: #302d2d; text-decoration: none;" href="https://levents.asia/term-policies/" >Term &amp; Policies</a>
             </div>
         </div>
+        
+        <script src="js/jquery-3.7.0.min.js"></script> 
+        <script src="js/jquery.validate.min.js"></script> 
+        <script >
+            $("#addForm").validate();
+         </script >    
     </body>
 
 </html>

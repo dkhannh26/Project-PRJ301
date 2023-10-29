@@ -298,7 +298,7 @@
                         </div>
                     <input name="submit" type="Submit" value="Login">
                     <div class="signup_link">
-                        Not a Member ? <a href="signup.php">Signup</a>
+                        Not a Member ? <a href="signup.jsp">Signup</a>
                     </div>
                 </form>
             </div>

@@ -12,8 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Home ${username} </h1>
+        <h1>Home ${username} </h1>  
         <a href="login.jsp"> Login </a><br/>
-        <a href="productList"> Product </a>
+        <a href="productList"> Product </a><br>
+      <a href="loginServlet">Log out</a>
     </body>
 </html>

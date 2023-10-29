@@ -79,7 +79,29 @@ public class loginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+
+        
+        Cookie arr[] = request.getCookies();
+
+        for (Cookie o : arr) {
+            if (o.getName().equals("userC")) {
+                o.setMaxAge(0);
+                response.addCookie(o);
+//                request.setAttribute("username", o.getValue());
+            
+            }
+            if (o.getName().equals("passC")) {
+                o.setMaxAge(0);
+                response.addCookie(o);
+
+//                request.setAttribute("password", o.getValue());
+            }
+            
+        }
+        HttpSession session = request.getSession();
+        session.setAttribute("username", "");
+        response.sendRedirect("home");
     }
 
     /**
@@ -109,7 +131,6 @@ public class loginServlet extends HttpServlet {
 
                 HttpSession session = request.getSession();
                 session.setAttribute("username", username);
-                
 
                 isEmpty = false;
 

@@ -253,7 +253,7 @@
             <div class="home">
                 <div class="col-4"><img class="VN" src="https://levents.asia/template/assets/images/svg/ic-vn.svg" alt=""></div>
                 <div class="col-4 logo">
-                    <a href="">DOTAI</a>
+                    <a href="index.jsp">DOTAI</a>
                 </div>
                 <div class="col-4 home-menu">
                     <span>
@@ -270,10 +270,10 @@
             <!-- thanh menu -->
             <div class="menu">
                 <ul>
-                    <li><a href="">About Us</a></li>
-                    <li><a href="">Products</a></li>
-                    <li><a href="">Sale</a></li>
-                    <li><a href="">Contact</a></li>
+                    <li><a href="aboutUs.jsp">About Us</a></li>
+                    <li><a href="product.jsp">Products</a></li>
+                    <li><a href="sale.jsp">Sale</a></li>
+                    <li><a href="contact.jsp">Contact</a></li>
                     <li><a href="">Customer Service</a></li>
                     <li><a href="">Recruitment</a></li>
                 </ul>
@@ -297,7 +297,7 @@
                     <div class="pass">Forget Password?</div>
                     <input name="submit" type="Submit" value="Login">
                     <div class="signup_link">
-                        Not a Member ? <a href="signup.php">Signup</a>
+                        Not a Member ? <a href="signUp.jsp">Signup</a>
                     </div>
                 </form>
             </div>

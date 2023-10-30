@@ -1,18 +1,20 @@
 <%-- 
-    Document   : index
-    Created on : Oct 27, 2023, 3:44:22 PM
+    Document   : customer
+    Created on : Oct 30, 2023, 8:05:38 PM
     Author     : LENOVO
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-   
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        <link rel="stylesheet" href="cs.css">
+        <title>Customer Care - Dotai</title>
+        <link rel = "icon" href =  "./logo.png" type = "image/x-icon"> 
         <style>
             .top h1 {
                 background-color: black;
@@ -27,13 +29,19 @@
             .menu ul {
                 display: flex;
                 justify-content: center;
-                border-top: 1px solid gray;
-                border-bottom: 1px solid gray;
+                border-top: 1px solid rgb(150, 147, 147);
+                border-bottom: 1px solid rgb(150, 147, 147);
+                padding-bottom: 10px;
             }
 
             .menu ul li {
-                margin: 10px 60px;
+                padding: 0 70px;
+                margin-top: 10px;
                 list-style-type: none;
+            }
+            .VN{
+                margin-left: 50px;
+                width: 10%;
             }
 
             .home {
@@ -46,7 +54,7 @@
                 padding: 0px;
             }
 
-            .logo {
+            .logo{
                 height: 100%;
             }
 
@@ -55,7 +63,7 @@
                 color: white;
                 position: absolute;
                 left: 50%;
-                top: 50%;
+                top: 10%;
                 transform: translate(-50%, -50%);
                 text-decoration: none;
                 width: 97px;
@@ -65,45 +73,44 @@
                 font-weight: 800;
             }
 
-
-            .home-menu img {
+            .home-menu {
+                padding-left: 60px;
+            }
+            .home-menu img{
                 width: 20px;
                 margin: 0 10px 0 10px;
             }
-
             .body h2 {
                 text-align: center;
                 margin: 55px;
                 font-size: 14px;
             }
-
-            .menu ul li a {
+            .menu ul li a{
                 text-decoration: none;
                 color: gray;
             }
 
-            .product {
-                display: flex;
-                flex-wrap: wrap;
+            .mid{
+                border-left: 1px solid rgb(170, 164, 164);
+                border-right: 1px solid rgb(170, 164, 164);
+                padding-bottom: 50px;
             }
 
-            .product img {
-                width: 100%;
-            }
-
-            .xemthem {
+            .con{
                 text-align: center;
-                margin-top: 19px;
-                margin-bottom: 51px;
+                margin: 100px 0;
             }
-
-            .xemthem a {
-                color: gray;
-                border: 1px solid gray;
-                padding: 5px 62px 5px 62px;
+            .op{
+                display: flex;
+                text-align: center;
+                margin: 100px 20px;
+                line-height: 60px;
+            }
+            .op a{
                 text-decoration: none;
+                color: #9b9b9b;
+                font-size: 17px;
             }
-
             .footer {
                 display: flex;
                 margin: 20px;
@@ -138,85 +145,31 @@
             .ft {
                 margin-bottom: 10%;
             }
-
-            .ftCon {
+            .ftCon{
                 color: #707070;
 
             }
-
-            .ftCon a {
+            .ftCon a{
                 text-decoration: none;
                 color: #707070;
 
             }
-
-            .ftCon ul {
+            .ftCon ul{
                 list-style: none;
             }
-
-            .LH a {
+            .LH a{
                 color: #707070;
             }
-
-            .footer_end {
+            .footer_end{
                 display: flex;
                 background-color: #c0c0c0;
                 padding: 15px;
             }
-
-            .helper {
-                background-color: rgb(59, 146, 246);
-                position: fixed;
-                text-align: right;
-                padding-right: 8px;
-                margin-bottom: 5px;
-                margin-right: 5px;
-                bottom: 0;
-                right: 0;
-                width: 90px;
-                border-radius: 59px;
-            }
-            .helper a{
-                font-size: 21px;
-                color: white;
-                text-decoration: none;
-            }
-            .map{
-                display: flex;
-            }
-            .hotro-title{
-                font-size: 20px;
-                font-family: "SVN-Futura Medium", sans-serif;
-                text-transform: uppercase;
-            }
-            .map .hotro .name,.mail,.sdt{
-                border-bottom: 1px solid #707070;
-                padding: 0;
-                margin: 6px;
-            }
-            .map .hotro .mail,.sdt{
-                width: 50%;
-            }
-            textarea{
-                padding: 20px 25px 20px 25px;
-                border: 1px solid gray;
-                outline: none;
-            }
-            .submit input{
-                width: 94px;
-                background-color: rgb(68, 66, 66);
-                border: 1px solid rgb(68, 66, 66);
-                color: white;
-                font-family: "SVN-Futura Medium", sans-serif;
-            }
-
-            .home-menu {
-                ${homeMenu}
-            }
-
-
         </style>
     </head>
+
+    <body>
+
     <body>
         <div class="header">
             <div class="top">
@@ -226,22 +179,17 @@
             <!-- thanh tiêu đề-->
 
             <div class="home">
-                <div class="col-1">
-                    ${logOutBtn}
-                </div>
-                <div class="col-3">
-                    ${email}
-                </div>
+                <div class="col-4"><img class="VN" src="https://levents.asia/template/assets/images/svg/ic-vn.svg"
+                                        alt=""></div>
                 <div class="col-4 logo">
-                    <a href="">DOTAI</a>
+                    <a href="index.jsp">DOTAI</a>
                 </div>
                 <div class="col-4 home-menu">
                     <img src="https://levents.asia/template/assets/images/notification.png" alt="bell">
                     <input type="text" placeholder="Search"> <img
                         src="https://levents.asia/template/assets/images/svg/ic-ser.svg" alt="search">
                     <img src="https://levents.asia/template/assets/images/svg/ic-cart.svg" alt="cart">
-                    <a href="login.jsp" ${style}> <img  src="https://levents.asia/template/assets/images/svg/ic-user.svg" alt="user"></a><br/>
-                    
+                    <img src="https://levents.asia/template/assets/images/svg/ic-user.svg" alt="user">
                 </div>
             </div>
 
@@ -249,125 +197,60 @@
             <!-- thanh menu -->
             <div class="menu">
                 <ul>
-                    <li><a href="aboutUs.jsp">About Us</a></li>
-                    <li><a href="productList">Products</a></li>
+                    <li><a href="">About Us</a></li>
+                    <li><a href="">Products</a></li>
                     <li><a href="">Sale</a></li>
                     <li><a href="">Contact</a></li>
-                    <li><a href="customer.jsp">Customer Service</a></li>
+                    <li><a href="">Customer Service</a></li>
                     <li><a href="">Recruitment</a></li>
                 </ul>
             </div>
         </div>
+        <!--------------------------->
 
-        <div>
-            <img style="width: 100%;"
-                 src="./background.jpg" alt="">
-        </div>
-
-        <div class="body">
-            <h2>NEW PRODUCT LINE DOTAI® CLASSIC</h2>
-            <div class="product">
-
-            </div>
-        </div>
-
-        <!-- product list -->
-        <div class="product">
-            <div class="col-3">
-                <a href=""><img src="https://levents.asia/wp-content/uploads/2023/08/MT-3-2048x2048.jpg" alt="levent"></a>
-                <p>DOTAI® AIRPLANE TEE/ WHITE</p>
-                <p>380,000 vnđ</p>
-            </div>
-
-            <div class="col-3">
-                <a href=""><img src="https://levents.asia/wp-content/uploads/2023/08/MT-5-2048x2048.jpg" alt="levent"></a>
-                <p>DOTAI® LOVE BOXY ZIPPER HOODIE/ BLACK</p>
-                <p>620,000 vnđ</p>
-            </div>
-
-            <div class="col-3">
-                <a href=""><img src="https://levents.asia/wp-content/uploads/2023/08/MT-10-2048x2048.jpg" alt="levent"></a>
-                <p>DOTAI® CLASSIC BLOCK JACKET/ BLACK</p>
-                <p>630,000 vnđ</p>
-            </div>
-
-            <div class="col-3">
-                <a href=""><img src="https://levents.asia/wp-content/uploads/2023/08/MT-6-2048x2048.jpg" alt="levent"></a>
-                <p>DOTAI® CLASSIC WASH STRAIGHT JEANS/ BLACK</p>
-                <p>610,000 vnđ</p>
-            </div>
-
-            <div class="col-3">
-                <a href=""><img src="https://levents.asia/wp-content/uploads/2023/08/MT-8-2048x2048.jpg" alt="levent"></a>
-                <p>DOTAI® BOOK BOXY TEE/ WHITE</p>
-                <p>430,000 vnđ</p>
-            </div>
-
-            <div class="col-3">
-                <a href=""><img src="https://levents.asia/wp-content/uploads/2023/08/MT-7-2048x2048.jpg" alt="levent"></a>
-                <p>DOTAI® BOOK BOXY TEE/ BLACK</p>
-                <p>380,000 vnđ</p>
-            </div>
-
-            <div class="col-3">
-                <a href=""><img src="https://levents.asia/wp-content/uploads/2023/08/MT-9-2048x2048.jpg" alt="levent"></a>
-                <p>DOTAI® BOOK SWEATER/ CREAM</p>
-                <p>510,000 vnđ</p>
-            </div>
-
-            <div class="col-3">
-                <a href=""><img src="https://levents.asia/wp-content/uploads/2023/08/MT-4-2048x2048.jpg" alt="levent"></a>
-                <p>DOTAI® CLASSIC MINI SHOULDER BAG/ BLACK</p>
-                <p>370,000 vnđ</p>
-            </div>
-        </div>
-
-        <!-- xem thêm -->
-        <div class="xemthem"">
-            <a href="">Xem thêm</a>
-        </div>
-
-        <!-- map and hỗ trợ -->
-        <div class=" map">
-            <div class="col-6">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.0533542574994!2d105.72985131073597!3d10.012451790052262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a0882139720a77%3A0x3916a227d0b95a64!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgQ-G6p24gVGjGoQ!5e0!3m2!1sen!2s!4v1698488213646!5m2!1sen!2s"
-                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-
-            <div class="col-6 flex-wrap hotro">
-                <div class="mt-3">
-                    <h4 class="hotro-title">
-                        GỬI TIN NHẮN NGAY CHO DOTAI <br>
-                        KHI BẠN CẦN HỖ TRỢ HOẶC CÓ THẮC MẮC NHÉ!
-                    </h4>
-                </div>
-
-                <div class="name mt-3">
-                    <input type="text" placeholder="Họ và tên" style="border: none; outline: none;">
-                </div>
-
-                <div style="display: flex;" class="mt-3">
-                    <div class="mail">
-                        <input type="text" placeholder="Email" style="border: none; outline: none;">
+        <div class="con">
+            <h4 class="care">CHĂM SÓC KHÁCH HÀNG</h4>
+            <div class="op">
+                <div class="col-md-4">
+                    <div>
+                        <a href="" class="cus__link">LÌ VEN FABRIC</a>
                     </div>
-                    <div class="sdt">
-                        <input type="text" placeholder="Số điện thoại" style="border: none; outline: none;">
+                    <div>
+                        <a href="" class="cus__link">Chính sách Thành viên</a>
+                    </div>
+                    <div>
+                        <a href="" class="cus__link">Q &amp;. A</a>
                     </div>
                 </div>
 
-                <div class="mt-3">
-                    <textarea name="" id="" cols="87" rows="8" placeholder="Lời nhắn"></textarea>
+                <div class="col-md-4">
+                    <div class="mid">
+                        <div>
+                            <a href="" class="cus__link">Mua sắm dễ dàng</a>
+                        </div>
+                        <div>
+                            <a href="" class="cus__link">Chính sách vận
+                                chuyển</a>
+                        </div>
+                    </div>
+
                 </div>
 
-                <div class="submit mt-3">
-                    <input type="submit" value="Gửi đi">
+                <div class="col-md-4">
+                    <div>
+                        <a href="" class="cus__link">Chính
+                            sách đổi trả &amp; bảo hành</a>
+                    </div>
+                    <div>
+                        <a href="" class="cus__link">Hướng
+                            dẫn mua hàng &amp; bảo quản</a>
+                    </div>
                 </div>
+
             </div>
         </div>
 
-        <!-- footer -->
+        <!-- <div class="ft__lim"> -->
         <div class="footer">
             <div class="col-md-4">
                 <div class="ft">
@@ -379,7 +262,7 @@
                         <p class="p1">HỘ KINH DOANH Red Label</p>
                         <p class="p1">GPKD được cấp bởi Cục Cảnh sát QLHC &amp; TTXH</p>
                         <p>Trụ sở hộ kinh doanh: 600 Nguyễn Văn Cừu, Phường An Bình, Quận Ninh Kiều, Tp. Cần Thơ</p>
-                        <p>Mã só thuê: 4S5T6K7D8N9T</p>
+                        <p>Mä só thuê: 4S5T6K7D8N9T</p>
                         <p class="p1">Ngày cấp: 01/01/2023</p>
                         <p>Người đại diện: Chưa biết</p>
                         <p class="p1">Mã Số thuế cá nhân: 0123456789-999</p>
@@ -405,7 +288,8 @@
                             <li>
                                 Email
                                 <br>
-                                <a href="mailto:Customercare@levents.asia" class="hov-df f-bold">Customercare@dotai.asia</a>
+                                <a href="mailto:Customercare@levents.asia"
+                                   class="hov-df f-bold">Customercare@dotai.asia</a>
                             </li>
                             <li>
                                 Thứ Hai - Chủ nhật
@@ -448,7 +332,8 @@
                                             mật</a>
                                     </li>
                                     <li id="menu-item-592379">
-                                        <a href="https://levents.asia/customer-care/storage-instructions-copy-copy-copy/">Chính
+                                        <a
+                                            href="https://levents.asia/customer-care/storage-instructions-copy-copy-copy/">Chính
                                             sách bảo hành</a>
                                     </li>
                                     <li id="menu-item-592380">
@@ -533,19 +418,6 @@
                     Policies</a>
             </div>
         </div>
-
-        <!-- helper -->
-        <div class="helper">
-            <a href=""> <img style="width: 38%;" src="https://cdn-icons-png.flaticon.com/128/3670/3670042.png"
-                             alt="">Help</a>
-        </div>
-
-
-
-
-
-        <h1>Home ${username} </h1>
-        <a href="login.jsp"> Login </a><br/>
-        <a href="productList"> Product </a>
     </body>
+
 </html>

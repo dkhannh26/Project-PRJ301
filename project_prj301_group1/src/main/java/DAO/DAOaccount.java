@@ -36,6 +36,19 @@ public class DAOaccount extends connectDB {
         return listAccount;
     }
 
+     public void updatePassword(String user, String pass) {
+        String sql = "update account\n"
+                + "set [password] = ?\n"
+                + "where username = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, pass);
+            ps.setString(2, user);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    
     public void insert(account a) {
         String sql = "INSERT INTO [dbo].[account]\n"
                 + "           ([username]\n"

@@ -7,16 +7,17 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author LENOVO
  */
-public class home extends HttpServlet {
+@WebServlet(name = "page", urlPatterns = {"/page"})
+public class page extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +36,10 @@ public class home extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet home</title>");
+            out.println("<title>Servlet page</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet home at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet page at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,19 +57,34 @@ public class home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-        HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("email");
+
+        String id = request.getParameter("pageId");
+        String email = request.getParameter("email");
         request.setAttribute("email", email);
-      
-//        String logOutBtn = "<a href =\"loginServlet\" >Log out</a>";
-        String logOutBtn = (String) session.getAttribute("logOutBtn");
-        request.setAttribute("logOutBtn", logOutBtn);
-//          String style ="style=\"display:none;\"";
-//          
-        String style = (String) session.getAttribute("style");
-        request.setAttribute("style", style);
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        if (email != "") {
+            String logOutBtn = "<a href =\"loginServlet\" >Log out</a>";
+            request.setAttribute("logOutBtn", logOutBtn);
+        }
+
+        switch (id) {
+            case "aboutUs":
+                request.getRequestDispatcher("aboutUs.jsp").forward(request, response);
+                break;
+            case "contact":
+                request.getRequestDispatcher("contact.jsp").forward(request, response);
+                break;
+            case "sale":
+                request.getRequestDispatcher("sale.jsp").forward(request, response);
+                break;
+            case "recruitment":
+                request.getRequestDispatcher("hiring.jsp").forward(request, response);
+                break;
+            case "customer":
+                request.getRequestDispatcher("customer.jsp").forward(request, response);
+                break;
+            default:
+                throw new AssertionError();
+        }
 
     }
 

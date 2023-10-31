@@ -13,7 +13,16 @@
               integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
         <!--<link rel = "icon" href =  "logo.png" type = "image/x-icon">--> 
         <title>Forget password</title>
+        <link rel = "icon" href =  "./img/logo.png" type = "image/x-icon">
         <style>
+            .menu a{
+                display: block;
+                transition: all 0.1s ease;
+            }
+            .menu a:hover{
+                transform: scale(1.2);
+                color: black;
+            }
             .top h1 {
                 background-color: black;
                 color: white;
@@ -146,7 +155,12 @@
             <!-- thanh tiêu đề-->
 
             <div class="home">
-                <div class="col-4"></div>
+                <div class="col-1">
+                    ${logOutBtn}
+                </div>
+                <div class="col-3">
+                    ${email}
+                </div>
                 <div class="col-4 logo">
                     <a href="home">DOTAI</a>
                 </div>
@@ -169,7 +183,7 @@
                     </div>
                     <div class="answer">
                         <input class="send" name="submit" type="Submit" value="Send Email">
-                        
+
                         <p>${message}</p>
                         <div class="signup_link">
                             Not a Member ? <a href="signUp.jsp">Signup</a>

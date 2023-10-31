@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+         <link rel = "icon" href =  "./img/logo.png" type = "image/x-icon">
     </head>
     <body>
         <h1>Add new product</h1>

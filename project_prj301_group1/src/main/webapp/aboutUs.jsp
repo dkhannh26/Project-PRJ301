@@ -13,7 +13,16 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
         <link rel="stylesheet" href="au.css">
+        <link rel = "icon" href =  "./img/logo.png" type = "image/x-icon">    
         <style>
+            .menu a{
+                display: block;
+                transition: all 0.1s ease;
+            }
+            .menu a:hover{
+                transform: scale(1.2);
+                color: black;
+            }
             .top h1 {
                 background-color: black;
                 color: white;
@@ -33,7 +42,7 @@
             }
 
             .menu ul li {
-                padding: 0 70px;
+                padding: 0 60px;
                 margin-top: 10px;
                 list-style-type: none;
             }
@@ -72,7 +81,7 @@
             }
 
             .home-menu {
-                padding-left: 60px;
+                padding-left: 50px;
             }
             .home-menu img{
                 width: 20px;
@@ -187,14 +196,20 @@
 
         <div class="header">
             <div class="top">
-                <h1>RELEASE OFFICIAL DOTAI® CLASSIC NEW PRODUCT LINE 2023</h1>
+                <h1>RELEASE OFFICIAL DOTAI® CLASSIC NEW PRODUCT LINE 2023 </h1>
             </div>
 
             <!-- thanh tiêu đề-->
 
             <div class="home">
-                <div class="col-4"><img class="VN" src="https://levents.asia/template/assets/images/svg/ic-vn.svg"
-                                        alt=""></div>
+                <div class="col-1">
+                    ${logOutBtn}
+                </div>
+                <div class="col-3">
+
+                    ${email}
+                </div>
+
                 <div class="col-4 logo">
                     <a href="index.jsp">DOTAI</a>
                 </div>
@@ -211,12 +226,12 @@
             <!-- thanh menu -->
             <div class="menu">
                 <ul>
-                    <li><a href="">About Us</a></li>
-                    <li><a href="">Products</a></li>
-                    <li><a href="">Sale</a></li>
-                    <li><a href="">Contact</a></li>
-                    <li><a href="">Customer Service</a></li>
-                    <li><a href="">Recruitment</a></li>
+                    <li><a href="page?pageId=aboutUs&&email=${email}">About Us</a></li>
+                    <li><a href="productList">Products</a></li>
+                    <li><a href="page?pageId=aboutUs&&email=${email}">Sale</a></li>
+                    <li><a href="page?pageId=contact&&email=${email}">Contact</a></li>
+                    <li><a href="page?pageId=customer&&email=${email}">Customer Service</a></li>
+                    <li><a href="page?pageId=recruitment&&email=${email}">Recruitment</a></li>
                 </ul>
             </div>
         </div>

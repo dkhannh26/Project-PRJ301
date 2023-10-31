@@ -13,9 +13,17 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
         <link rel="stylesheet" href="sign.css">
-
+        <link rel = "icon" href =  "./img/logo.png" type = "image/x-icon">
         <title>Login</title>
         <style>
+            .menu a{
+                display: block;
+                transition: all 0.1s ease;
+            }
+            .menu a:hover{
+                transform: scale(1.2);
+                color: black;
+            }
             .back a{
                 text-decoration: none;
                 margin-left: 50px;
@@ -30,7 +38,7 @@
                 font-size: 16px;
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             }
-
+            
             .menu ul {
                 display: flex;
                 justify-content: center;
@@ -40,7 +48,7 @@
             }
 
             .menu ul li {
-                padding: 0 70px;
+                padding: 0 60px;
                 margin-top: 10px;
                 list-style-type: none;
             }
@@ -79,7 +87,7 @@
             }
 
             .home-menu {
-                padding-left: 60px;
+                padding-left: 50px;
             }
             .home-menu img{
                 width: 20px;
@@ -260,12 +268,12 @@
             <!-- thanh menu -->
             <div class="menu">
                 <ul>
-                    <li><a href="">About Us</a></li>
-                    <li><a href="">Products</a></li>
-                    <li><a href="">Sale</a></li>
-                    <li><a href="">Contact</a></li>
-                    <li><a href="">Customer Service</a></li>
-                    <li><a href="">Recruitment</a></li>
+                    <li><a href="page?pageId=aboutUs&&email=${email}">About Us</a></li>
+                    <li><a href="productList">Products</a></li>
+                    <li><a href="page?pageId=aboutUs&&email=${email}">Sale</a></li>
+                    <li><a href="page?pageId=contact&&email=${email}">Contact</a></li>
+                    <li><a href="page?pageId=customer&&email=${email}">Customer Service</a></li>
+                    <li><a href="page?pageId=recruitment&&email=${email}">Recruitment</a></li>
                 </ul>
             </div>
         </div>
@@ -292,7 +300,7 @@
 
                 </form>
                 <!--<a href="login.jsp"><input name="submit" type="Submit" value="Back"></a>-->
-                <p>${message}</p>
+                ${message}
             </div>
 
         </div>

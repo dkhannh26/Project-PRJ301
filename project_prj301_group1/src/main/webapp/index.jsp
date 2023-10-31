@@ -10,10 +10,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-   
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel = "icon" href =  "./img/logo.png" type = "image/x-icon">
         <style>
+            .menu a{
+                display: block;
+                transition: all 0.1s ease;
+            }
+            .menu a:hover{
+                transform: scale(1.2);
+                color: black;
+            }
             .top h1 {
                 background-color: black;
                 color: white;
@@ -210,9 +218,7 @@
                 font-family: "SVN-Futura Medium", sans-serif;
             }
 
-            .home-menu {
-                ${homeMenu}
-            }
+
 
 
         </style>
@@ -227,7 +233,7 @@
 
             <div class="home">
                 <div class="col-1">
-                   ${logOutBtn}
+                    ${logOutBtn}
                 </div>
                 <div class="col-3">
                     ${email}
@@ -241,7 +247,7 @@
                         src="https://levents.asia/template/assets/images/svg/ic-ser.svg" alt="search">
                     <img src="https://levents.asia/template/assets/images/svg/ic-cart.svg" alt="cart">
                     <a href="login.jsp" ${style}> <img  src="https://levents.asia/template/assets/images/svg/ic-user.svg" alt="user"></a><br/>
-                    
+
                 </div>
             </div>
 
@@ -249,19 +255,19 @@
             <!-- thanh menu -->
             <div class="menu">
                 <ul>
-                    <li><a href="aboutUs.jsp">About Us</a></li>
+                    <li><a href="page?pageId=aboutUs&&email=${email}">About Us</a></li>
                     <li><a href="productList">Products</a></li>
-                    <li><a href="">Sale</a></li>
-                    <li><a href="">Contact</a></li>
-                    <li><a href="customer.jsp">Customer Service</a></li>
-                    <li><a href="">Recruitment</a></li>
+                    <li><a href="page?pageId=aboutUs&&email=${email}">Sale</a></li>
+                    <li><a href="page?pageId=contact&&email=${email}">Contact</a></li>
+                    <li><a href="page?pageId=customer&&email=${email}">Customer Service</a></li>
+                    <li><a href="page?pageId=recruitment&&email=${email}">Recruitment</a></li>
                 </ul>
             </div>
         </div>
 
         <div>
             <img style="width: 100%;"
-                 src="./background.jpg" alt="">
+                 src="img/background.jpg" alt="">
         </div>
 
         <div class="body">

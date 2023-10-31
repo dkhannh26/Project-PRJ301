@@ -89,7 +89,7 @@ public class signUp extends HttpServlet {
         Boolean check = true;
         for (account ac : list) {
             if (user.equals(ac.getUsername())) {
-                request.setAttribute("message", "Username already exists");
+                request.setAttribute("message", "<p style=\"color:red; text-align: center;\">Username is already exist</p>");
                 check = false;
                 request.getRequestDispatcher("signUp.jsp").forward(request, response);
             }
@@ -98,7 +98,7 @@ public class signUp extends HttpServlet {
             account a = new account(user, md5, email);
             dao.insert(a);
 
-            request.setAttribute("message", "Successfully");
+            request.setAttribute("message", "<p style=\"color:green; text-align: center;\">Successfully</p>");
             request.getRequestDispatcher("signUp.jsp").forward(request, response);
 
         }

@@ -24,6 +24,10 @@
         <servlet-name>updateProducr</servlet-name>
         <servlet-class>controller.updateProducr</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>page</servlet-name>
+        <servlet-class>controller.page</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/loginServlet</url-pattern>
@@ -50,6 +54,10 @@
     <servlet-mapping>
         <servlet-name>updateProducr</servlet-name>
         <url-pattern>/updateProducr</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>page</servlet-name>
+        <url-pattern>/page</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

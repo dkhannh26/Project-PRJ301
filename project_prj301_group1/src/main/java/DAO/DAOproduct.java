@@ -101,14 +101,14 @@ public class DAOproduct extends connnectDB.connectDB {
         }
     }
 
-    public void updateQuan(String quan, String id) {
+    public void updateQuan(int quan, int id) {
         String sql = "update product\n"
                 + "set pro_quan = ?\n"
                 + "where pro_id = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, quan);
-            ps.setString(2, id);
+            ps.setInt(1, quan);
+            ps.setInt(2, id);
             ps.executeUpdate();
         } catch (Exception e) {
         }

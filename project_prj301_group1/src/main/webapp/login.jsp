@@ -12,11 +12,19 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-
+        <link rel = "icon" href =  "./img/logo.png" type = "image/x-icon">
 
         <title>Login</title>
 
         <style>
+            .menu a{
+                display: block;
+                transition: all 0.1s ease;
+            }
+            .menu a:hover{
+                transform: scale(1.2);
+                color: black;
+            }
             .top h1 {
                 background-color: black;
                 color: white;
@@ -251,7 +259,12 @@
             <!-- thanh tiêu đề-->
 
             <div class="home">
-                <div class="col-4"><img class="VN" src="https://levents.asia/template/assets/images/svg/ic-vn.svg" alt=""></div>
+                 <div class="col-1">
+                    ${logOutBtn}
+                </div>
+                <div class="col-3">
+                    ${email}
+                </div>
                 <div class="col-4 logo">
                     <a href="index.jsp">DOTAI</a>
                 </div>
@@ -271,12 +284,12 @@
             <!-- thanh menu -->
             <div class="menu">
                 <ul>
-                    <li><a href="aboutUs.jsp">About Us</a></li>
-                    <li><a href="product.jsp">Products</a></li>
-                    <li><a href="sale.jsp">Sale</a></li>
-                    <li><a href="contact.jsp">Contact</a></li>
-                    <li><a href="">Customer Service</a></li>
-                    <li><a href="">Recruitment</a></li>
+                    <li><a href="page?pageId=aboutUs&&email=${email}">About Us</a></li>
+                    <li><a href="productList">Products</a></li>
+                    <li><a href="page?pageId=aboutUs&&email=${email}">Sale</a></li>
+                    <li><a href="page?pageId=contact&&email=${email}">Contact</a></li>
+                    <li><a href="page?pageId=customer&&email=${email}">Customer Service</a></li>
+                    <li><a href="page?pageId=recruitment&&email=${email}">Recruitment</a></li>
                 </ul>
             </div>
         </div>
@@ -469,4 +482,4 @@
                     </script >
                     </body>
 
-                    </html>
+            </html>

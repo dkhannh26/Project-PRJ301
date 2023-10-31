@@ -4,19 +4,26 @@
  */
 package controller;
 
+import DAO.DAOaccount;
+import entity.account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 /**
  *
- * @author LENOVO
+ * @author thinh
  */
-public class home extends HttpServlet {
+@WebServlet(name = "signUp", urlPatterns = {"/signUp"})
+public class signUp extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,10 +42,10 @@ public class home extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet home</title>");
+            out.println("<title>Servlet signUp</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet home at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet signUp at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,21 +63,7 @@ public class home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-        HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("email");
-        request.setAttribute("email", email);
-        String homeMenu = "padding-left: 40px;";
-        request.setAttribute("homeMenu", homeMenu);
-//        String logOutBtn = "<a href =\"loginServlet\" >Log out</a>";
-        String logOutBtn = (String) session.getAttribute("logOutBtn");
-        request.setAttribute("logOutBtn", logOutBtn);
-//          String style ="style=\"display:none;\"";
-//          
-        String style = (String) session.getAttribute("style");
-        request.setAttribute("style", style);
-        request.getRequestDispatcher("index.jsp").forward(request, response);
-
+        processRequest(request, response);
     }
 
     /**
@@ -84,7 +77,56 @@ public class home extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+
+        String user = request.getParameter("username");
+        String pass = request.getParameter("password");
+        String email = request.getParameter("email");
+        DAOaccount dao = new DAOaccount();
+
+        List<account> list = dao.getAll();
+        String md5 = getMd5(pass);
+        Boolean check = true;
+        for (account ac : list) {
+            if (user.equals(ac.getUsername())) {
+                request.setAttribute("message", "Username already exists");
+                check = false;
+                request.getRequestDispatcher("signUp.jsp").forward(request, response);
+            }
+        }
+        if (check) {
+            account a = new account(user, md5, email);
+            dao.insert(a);
+
+            request.setAttribute("message", "Successfully");
+            request.getRequestDispatcher("signUp.jsp").forward(request, response);
+
+        }
+    }
+
+    public static String getMd5(String input) {
+        try {
+
+            // Static getInstance method is called with hashing MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+
+            // digest() method is called to calculate message digest
+            // of an input digest() return array of byte
+            byte[] messageDigest = md.digest(input.getBytes());
+
+            // Convert byte array into signum representation
+            BigInteger no = new BigInteger(1, messageDigest);
+
+            // Convert message digest into hex value
+            String hashtext = no.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        } // For specifying wrong message digest algorithms
+        catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

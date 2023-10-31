@@ -227,7 +227,7 @@
 
             <div class="home">
                 <div class="col-1">
-                    ${logOutBtn}
+                   ${logOutBtn}
                 </div>
                 <div class="col-3">
                     ${email}

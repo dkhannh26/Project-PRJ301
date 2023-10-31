@@ -16,6 +16,11 @@
 
         <title>Login</title>
         <style>
+            .back a{
+                text-decoration: none;
+                margin-left: 50px;
+            }
+
             .top h1 {
                 background-color: black;
                 color: white;
@@ -246,7 +251,8 @@
                     <input type="text" placeholder="Search"> <img
                         src="https://levents.asia/template/assets/images/svg/ic-ser.svg" alt="search">
                     <img src="https://levents.asia/template/assets/images/svg/ic-cart.svg" alt="cart">
-                    <img src="https://levents.asia/template/assets/images/svg/ic-user.svg" alt="user">
+                    <a href="login.jsp" ${style}> <img  src="https://levents.asia/template/assets/images/svg/ic-user.svg" alt="user"></a><br/>
+
                 </div>
             </div>
 
@@ -285,10 +291,12 @@
                     <input name="submit" type="Submit" value="Sign Up">
 
                 </form>
-                <a href="login.jsp"><input name="submit" type="Submit" value="Back"></a>
+                <!--<a href="login.jsp"><input name="submit" type="Submit" value="Back"></a>-->
                 <p>${message}</p>
             </div>
+
         </div>
+        <!--<div class="back"><a href="login.jsp">&leftarrow;Back to shop</a></div>-->
 
         <!-- <div class="ft__lim"> -->
         <div class="footer">

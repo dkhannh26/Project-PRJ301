@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    
+
 
         <title>Login</title>
 
@@ -142,7 +142,7 @@
                 color: #2691d9;
             }
 
-           
+
 
             .pass {
                 margin: -5px 0 20px 5px;
@@ -257,11 +257,12 @@
                 </div>
                 <div class="col-4 home-menu">
                     <span>
-                    <img src="https://levents.asia/template/assets/images/notification.png" alt="bell">
-                    <input type="text" placeholder="Search"> <img
-                        src="https://levents.asia/template/assets/images/svg/ic-ser.svg" alt="search">
-                    <img src="https://levents.asia/template/assets/images/svg/ic-cart.svg" alt="cart">
-                    <img src="https://levents.asia/template/assets/images/svg/ic-user.svg" alt="user">
+                        <img src="https://levents.asia/template/assets/images/notification.png" alt="bell">
+                        <input type="text" placeholder="Search"> <img
+                            src="https://levents.asia/template/assets/images/svg/ic-ser.svg" alt="search">
+                        <img src="https://levents.asia/template/assets/images/svg/ic-cart.svg" alt="cart">
+                        <a href="login.jsp" ${style}> <img  src="https://levents.asia/template/assets/images/svg/ic-user.svg" alt="user"></a><br/>
+
                     </span>
                 </div>
             </div>
@@ -295,8 +296,8 @@
                     </div>
                     ${message}
                     <div class="pass">
-                        <a href="forgetPass.jsp">Forget Password?</a>
-                        
+                        <a style=" color: #a6a6a6; text-decoration: none" href="forgetPass.jsp">Forget Password?</a>
+
                     </div>
                     <input name="submit" type="Submit" value="Login">
                     <div class="signup_link">
@@ -460,12 +461,12 @@
                 <a style="color: #302d2d; text-decoration: none;" href="https://levents.asia/term-policies/" >Term &amp; Policies</a>
             </div>
         </div>
-        
+
         <script src="js/jquery-3.7.0.min.js"></script> 
         <script src="js/jquery.validate.min.js"></script> 
         <script >
             $("#addForm").validate();
-         </script >    
-    </body>
+                    </script >
+                    </body>
 
-</html>
+                    </html>

@@ -179,7 +179,7 @@
                 </form>
             </div>
         </div>
-        <div class="back"><a href="#">&leftarrow;Back to shop</a></div>
+        <div class="back"><a href="login.jsp">&leftarrow;Back to shop</a></div>
 
     </body>
 </html>

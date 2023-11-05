@@ -56,6 +56,7 @@ public class productList extends HttpServlet {
         
 //        request.setAttribute("userName", userName);
 //        request.setAttribute("list", list);
+      
         request.setAttribute("listProduct", listProduct);
         request.getRequestDispatcher("product.jsp").forward(request, response);
     } 

@@ -10,32 +10,64 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-         <link rel = "icon" href =  "./img/logo.png" type = "image/x-icon">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel = "icon" href =  "./img/logo.png" type = "image/x-icon">
     </head>
     <body>
-        <h1>Add new product</h1>
+  
         <h3 style="color: red">${error}</h3>
         <!--String username, String password, String fullname, String gender, String department, Date birthdate-->
-        <form action="addProduct" id="addForm">
-            <!--            tring type = request.getParameter("type");
-                        String pro_quan = request.getParameter("pro_quan");
-                        String pro_id = request.getParameter("pro_id");
-                        String pro_name = request.getParameter("pro_name");
-                        String pro_sale = request.getParameter("pro_sale");
-                        String pro_price = request.getParameter("pro_price");
-                        String pro_pic = request.getParameter("pro_pic");
-                        String pro_des = request.getParameter("pro_des");-->
-            Enter Type: <input type="number" min="0" max="1" name="type" required><br>
-            Enter quan: <input type="number" name="pro_quan" required><br>
-            Enter id: <input type="number" name="pro_id" required min="1"><br>
-            Enter name <input type="text" name="pro_name" required ><br>
-            Enter sale: <input type="number" name="pro_sale" required><br>
-            Enter price: <input type="number" name="pro_price" required><br>
-            Enter pic: <input type="text" name="pro_pic" required><br>
-            Enter des: <input type="text" name="pro_des" required><br>
-            <input type="submit" value="save">
+        <form action="addProduct" id="addForm" class="container">
+            <h1 class="mt-4">Add New Product</h1>
+            <h3 class="text-danger">${error}</h3>
+
+            <div class="form-group">
+                <label for="type">Select Type</label>
+                <select name="type" id="type" class="form-control">
+                    <option value="0">Áo</option>
+                    <option value="1">Quần</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="pro_quan">Enter Quantity</label>
+                <input type="number" name="pro_quan" id="pro_quan" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pro_id">Enter ID</label>
+                <input type="number" name="pro_id" id="pro_id" class="form-control" required min="1">
+            </div>
+
+            <div class="form-group">
+                <label for="pro_name">Enter Name</label>
+                <input type="text" name="pro_name" id="pro_name" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pro_sale">Enter Sale</label>
+                <input type="number" name="pro_sale" id="pro_sale" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pro_price">Enter Price</label>
+                <input type="number" name="pro_price" id="pro_price" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pro_pic">Enter Picture URL</label>
+                <input type="text" name="pro_pic" id="pro_pic" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pro_des">Enter Description</label>
+                <input type="text" name="pro_des" id="pro_des" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
         </form>
-        
+
         <script src="js/jquery-3.7.0.min.js"></script> 
         <script src="js/jquery.validate.min.js"></script> 
         <script >

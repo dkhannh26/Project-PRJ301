@@ -71,7 +71,7 @@ public class product {
         this.pro_sale = pro_sale;
     }
 
-    public int getPro_price() {
+    public int getPro_price() {    
         return pro_price;
     }
 

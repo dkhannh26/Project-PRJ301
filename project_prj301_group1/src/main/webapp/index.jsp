@@ -251,13 +251,14 @@
 
                 </div>
             </div>
-
+                    
+                    
 
             <!-- thanh menu -->
             <div class="menu">
                 <ul>
                     <li><a href="page?pageId=aboutUs&&email=${email}">About Us</a></li>
-                    <li><a href="productList">Products</a></li>
+                    <li><a href="productList?email=${email}">Products</a></li>
                     <li><a href="page?pageId=aboutUs&&email=${email}">Sale</a></li>
                     <li><a href="page?pageId=contact&&email=${email}">Contact</a></li>
                     <li><a href="page?pageId=customer&&email=${email}">Customer Service</a></li>
@@ -331,7 +332,7 @@
 
         <!-- xem thêm -->
         <div class="xemthem"">
-            <a href="">Xem thêm</a>
+            <a href="productList">Xem thêm</a>
         </div>
 
         <!-- map and hỗ trợ -->

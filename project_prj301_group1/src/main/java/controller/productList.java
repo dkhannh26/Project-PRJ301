@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import DAO.DAOproduct;
@@ -21,51 +20,74 @@ import jakarta.servlet.annotation.WebServlet;
  *
  * @author LENOVO
  */
-
 @WebServlet(name = "productList", urlPatterns = "/productList")
 public class productList extends HttpServlet {
- 
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet product</title>");  
+            out.println("<title>Servlet product</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet product at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet product at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    } 
-
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
 
         DAOproduct dao = new DAOproduct();
-       
+
         List<product> listProduct = dao.getAll();
-        
-//        HttpSession session = request.getSession();
-//        String userName = (String) session.getAttribute("userName");
-        
-//        request.setAttribute("userName", userName);
-//        request.setAttribute("list", list);
-      
+
+        String email = request.getParameter("email");
+        if (email.equals("thinhldce171774@fpt.edu.vn")) {
+            String cssAdmin = "style=\"display: inline;\"";
+            request.setAttribute("cssAdmin", cssAdmin);
+        }
+
         request.setAttribute("listProduct", listProduct);
         request.getRequestDispatcher("product.jsp").forward(request, response);
-    } 
-
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException {
+
+//        if(username.equals("admin") && password.equals("admin")) {
+//                    String cssAdmin = "style=\"display: inline;\""; 
+//                    request.setAttribute("cssAdmin", cssAdmin);
+//                }
+        String email = request.getParameter("email");
+        if (email.equals("thinhldce171774@fpt.edu.vn")) {
+            String cssAdmin = "style=\"display: inline;\"";
+            request.setAttribute("cssAdmin", cssAdmin);
+        }
+
+        DAOproduct dao = new DAOproduct();
+        String filterID = request.getParameter("filterID");
+
+        if (filterID.equals("Top")) {
+            List<product> listTop = dao.getTop();
+            request.setAttribute("listProduct", listTop);
+
+        } else if (filterID.equals("Bottom")) {
+            List<product> listBottom = dao.getBottom();
+            request.setAttribute("listProduct", listBottom);
+        } else {
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
+
+        request.getRequestDispatcher("product.jsp").forward(request, response);
+
     }
 
     @Override

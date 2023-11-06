@@ -147,6 +147,9 @@ public class loginServlet extends HttpServlet {
                 session.setAttribute("style", style);
                 String logOutBtn = "<a href =\"loginServlet\" >Log out</a>";
                 session.setAttribute("logOutBtn", logOutBtn);
+                
+                
+                
                 response.sendRedirect("home");
             }
         }

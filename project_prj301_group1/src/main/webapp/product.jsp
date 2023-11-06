@@ -20,6 +20,12 @@
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel = "icon" href =  "./img/logo.png" type = "image/x-icon">
         <style>
+            #filter {
+                width: 7%;
+            }
+            .filterBtn {
+                height: 95%;
+            }
             .item {
                 height: 450px;
             }
@@ -27,10 +33,8 @@
                 height: 283.35px;
             }
             img:hover {
-                 transform: scale(1.11);
-                 margin: 10px;
-                 transition: 0.5s;
-             }
+                cursor: pointer;
+            }
             .menu a{
                 display: block;
                 transition: all 0.1s ease;
@@ -234,7 +238,9 @@
                 color: white;
                 font-family: "SVN-Futura Medium", sans-serif;
             }
-
+            .admin {
+             display: none;
+            }
 
 
 
@@ -273,7 +279,7 @@
             <div class="menu">
                 <ul>
                     <li><a href="page?pageId=aboutUs&&email=${email}">About Us</a></li>
-                    <li><a href="productList">Products</a></li>
+                    <li><a href="productList?email=${email}">Products</a></li>
                     <li><a href="page?pageId=aboutUs&&email=${email}">Sale</a></li>
                     <li><a href="page?pageId=contact&&email=${email}">Contact</a></li>
                     <li><a href="page?pageId=customer&&email=${email}">Customer Service</a></li>
@@ -281,9 +287,20 @@
                 </ul>
             </div>
         </div>
-    <center>
-        <a href="addProduct.jsp" class="admin" >Add product</a>
+    <center >
+        <a href="addProduct.jsp" class="admin add" ${cssAdmin} >Add product</a>
     </center>
+
+     <form action="productList" method="post">
+         <input type="hidden" value="${email}" name="email"/>
+         <div style="display: flex;">
+        <select name="filterID" id="filter" class="form-control ml-5 mb-2">
+            <option value="Top">Top</option>
+            <option value="Bottom">Bottom</option>
+        </select>
+         <button type="submit" name="submit"  class="ml-3 filterBtn"> Filter</button>
+         </div>
+    </form>
     <!-- product list -->
     <div class="product">
 
@@ -300,42 +317,16 @@
 
 
                 <p>${formattedPrice} vnđ</p>
-                <a class="admin" href ="updateProduct?pro_id=${product.getPro_id()}">Update</a>
-                <a class="admin" href="#" onclick="doDelete('${product.getPro_id()}')">Delete </a> 
+                <a ${cssAdmin} class="admin" href ="updateProduct?pro_id=${product.getPro_id()}">Update</a>
+                <a ${cssAdmin} class="admin" href="#" onclick="doDelete('${product.getPro_id()}')">Delete </a> 
             </div>
         </c:forEach> 
 
-        <div class="col-3 item">
-            <a href=""><img src="https://levents.asia/wp-content/uploads/2023/08/MT-3-2048x2048.jpg" alt="levent"></a>
-            <p>DOTAI® AIRPLANE TEE/ WHITE</p>
-            <p>380,000 vnđ</p>
-        </div>
-
-        <div class="col-3 item">
-            <a href=""><img src="https://levents.asia/wp-content/uploads/2023/08/MT-5-2048x2048.jpg" alt="levent"></a>
-            <p>DOTAI® LOVE BOXY ZIPPER HOODIE/ BLACK</p>
-            <p>620,000 vnđ</p>
-        </div>
-
-        <div class="col-3 item">
-            <a href=""><img src="https://levents.asia/wp-content/uploads/2023/08/MT-10-2048x2048.jpg" alt="levent"></a>
-            <p>DOTAI® CLASSIC BLOCK JACKET/ BLACK</p>
-            <p>630,000 vnđ</p>
-        </div>
-
-        <div class="col-3 item">
-            <a href=""><img src="https://levents.asia/wp-content/uploads/2023/08/MT-6-2048x2048.jpg" alt="levent"></a>
-            <p>DOTAI® CLASSIC WASH STRAIGHT JEANS/ BLACK</p>
-            <p>610,000 vnđ</p>
-        </div>
-
+     
 
     </div>
 
-    <!-- xem thêm -->
-    <div class="xemthem">
-        <a href="">Xem thêm</a>
-    </div>
+ 
 
     <!-- footer -->
     <div class="footer">

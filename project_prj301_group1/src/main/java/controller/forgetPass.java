@@ -10,9 +10,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -86,6 +88,9 @@ public class forgetPass extends HttpServlet {
             if (emailReceive.equals(account.getEmail())) {
                 userSend = account.getUsername();
                 passSend = account.getPassword();
+                HttpSession s = request.getSession();
+                s.setAttribute("user", userSend);
+                s.setAttribute("pass", passSend);
 
                 final String userName = "userforprj301@gmail.com"; // Tài khoản email gửi
                 final String password = "ldba opym eham budu"; // Mật khẩu email gửi
@@ -103,9 +108,10 @@ public class forgetPass extends HttpServlet {
                     }
                 });
 
-                String newPass = generateRandomString(5);
-
-                mess = "Username: " + userSend + "\nPassword: " + newPass;
+                String code = generateRandomString(5);
+                s.setAttribute("code", code);
+//                mess = "Username: " + userSend + "\nPassword: " + newPass;
+                mess = "Your code: " + code;
                 try {
                     Message message = new MimeMessage(session);
                     message.setFrom(new InternetAddress(userName));
@@ -120,10 +126,12 @@ public class forgetPass extends HttpServlet {
                 }
                 check = false;
 
-                String md5 = getMd5(newPass).toUpperCase();
-                dao.updatePassword(userSend, md5);
-                request.setAttribute("message", "Password has been sent to your email");
-                request.getRequestDispatcher("forgetPass.jsp").forward(request, response);
+//                String md5 = getMd5(newPass).toUpperCase();
+//                dao.updatePassword(userSend, md5);
+                request.setAttribute("message", "Please enter the code sent to your email to continue");
+                request.setAttribute("emailReceive", emailReceive);
+                s.setAttribute("emailReceive", emailReceive);
+                request.getRequestDispatcher("forgetPassNext.jsp").forward(request, response);
 
             }
         }
@@ -187,7 +195,35 @@ public class forgetPass extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+        HttpSession session = request.getSession();
+        String codeSend = (String) session.getAttribute("code");
+        String emailReceive = (String) session.getAttribute("emailReceive");
+        request.setAttribute("emailReceive", emailReceive);
+        String codeInput = request.getParameter("code");
+        if (codeSend.equals(codeInput)) {
+            session.setAttribute("email", emailReceive);
+            String username = (String) session.getAttribute("user");
+            String password = (String) session.getAttribute("pass");
+
+            Cookie u = new Cookie("userC", username);
+            Cookie p = new Cookie("passC", password);
+            u.setMaxAge(60 * 60 * 24 * 3);
+            p.setMaxAge(60 * 60 * 24 * 3);
+            response.addCookie(u);
+            response.addCookie(p);
+            String style = "style=\"display:none;\"";
+            session.setAttribute("style", style);
+            String logOutBtn = "<a href =\"loginServlet\" >Log out</a>";
+            session.setAttribute("logOutBtn", logOutBtn);
+
+            response.sendRedirect("home");
+        } else {
+            String ms = "Wrong code";
+            request.setAttribute("message", ms);
+            request.getRequestDispatcher("forgetPassNext.jsp").forward(request, response);
+        }
+
     }
 
     /**

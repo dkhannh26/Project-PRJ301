@@ -1,6 +1,6 @@
 <%-- 
-    Document   : forgetPass
-    Created on : Oct 30, 2023, 10:14:21 PM
+    Document   : forgetPassNext
+    Created on : Nov 7, 2023, 12:20:28 AM
     Author     : thinh
 --%>
 
@@ -175,18 +175,25 @@
         <div class="container">
             <div class="center">
                 <h2>Forgot Password</h2>
-                <form action="forgetPass" method="GET">
+                <form action="forgetPass" method="post">
                     <div class="txt_field">
-                        <input type="email" name="email" required>
-                        <span></span>
-                        <label>Email</label>
-                        
-                    </div>
-                    
-                    <div class="answer">
-                        <input class="send" name="submit" type="Submit" value="Send code">
+                        <input type="email" name="email" value="${emailReceive}" readonly>
+<!--                        <span></span>
+                        <label>Email</label>-->
 
-                        <!--<p>${message}</p>-->
+                    </div>
+                    <div class="txt_field">
+
+                        <input type="text" name="code" required>
+                        <span></span>
+                        <label>Enter code</label>
+                    </div>
+
+
+                    <div class="answer">
+                        <input class="send" name="submit" type="Submit" value="Next">
+
+                        <p>${message}</p>
                         <div class="signup_link">
                             Not a Member ? <a href="signUp.jsp">Signup</a>
                         </div>

@@ -144,6 +144,9 @@
                 text-decoration: none;
                 margin-left: 50px;
             }
+            .error{
+                color: red;
+            }
         </style>
     </head>
     <body>
@@ -175,18 +178,18 @@
         <div class="container">
             <div class="center">
                 <h2>Forgot Password</h2>
-                <form action="forgetPass" method="post">
+                <form action="forgetPass" method="post" id="fg">
                     <div class="txt_field">
                         <input type="email" name="email" value="${emailReceive}" readonly>
-<!--                        <span></span>
-                        <label>Email</label>-->
+                        <!--                        <span></span>
+                                                <label>Email</label>-->
 
                     </div>
                     <div class="txt_field">
-
-                        <input type="text" name="code" required>
-                        <span></span>
-                        <label>Enter code</label>
+                        
+                        <input placeholder="Enter code" type="text" name="code" required true>
+                        <!--<span></span>-->
+                        <!--<label>Enter code</label>-->
                     </div>
 
 
@@ -203,6 +206,19 @@
             </div>
         </div>
         <div class="back"><a href="login.jsp">&leftarrow;Back to shop</a></div>
+        <script src="./js/jquery-3.7.0.min.js"></script>
+        <script src="./js/jquery.validate.min.js"></script>
 
+        <script>
+            $("#fg").validate({
+                messages:
+                        {
+                            "code": {
+                                required: "Please enter code"
+                            }
+                        }
+
+            });
+        </script>
     </body>
 </html>

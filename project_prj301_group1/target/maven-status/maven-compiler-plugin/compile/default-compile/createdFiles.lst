@@ -1,0 +1,12 @@
+DAO\DAOproduct.class
+controller\addProduct.class
+controller\loginServlet.class
+entity\account.class
+controller\deleteProduct.class
+connnectDB\connectDB.class
+controller\home.class
+controller\forgetPassword$1.class
+entity\product.class
+DAO\DAOaccount.class
+controller\forgetPassword.class
+controller\productList.class

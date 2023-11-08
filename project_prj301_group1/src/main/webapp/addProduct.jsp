@@ -321,7 +321,7 @@
                             <div class="txt_field">
                                 <input type="text" name="pro_des" id="pro_des"  required>
                                 <span></span>
-                                <label>Describe</label>
+                                <label>Description</label>
                             </div>
                         </div>
                     </div>
@@ -382,7 +382,7 @@
 
                     },
                     pro_id: {
-                        required: "Id product is required",
+                        required: "ID product is required",
 
                     },
                     pro_name: "Name is required",

@@ -212,6 +212,10 @@ public class forgetPass extends HttpServlet {
             p.setMaxAge(60 * 60 * 24 * 3);
             response.addCookie(u);
             response.addCookie(p);
+            Cookie e = new Cookie("email", emailReceive);
+            e.setMaxAge(60 * 60 * 24 * 3);
+            response.addCookie(e);
+
             String style = "style=\"display:none;\"";
             session.setAttribute("style", style);
             String logOutBtn = "<a href =\"loginServlet\" >Log out</a>";

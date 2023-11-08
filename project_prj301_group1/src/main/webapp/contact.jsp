@@ -284,21 +284,28 @@
             <!-- thanh tiêu đề-->
 
             <div class="home">
-                 <div class="col-1">
+                <div class="col-1">
                     ${logOutBtn}
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                     ${email}
                 </div>
+                <form action="addOrder" method="post">
+                    <div  class="none col-1" ${stylee}>
+
+                  <button type="submit">List order</button>
+                </div>
+                </form>
                 <div class="col-4 logo">
-                    <a href="">DOTAI</a>
+                    <a href="index.jsp">DOTAI</a>
                 </div>
                 <div class="col-4 home-menu">
                     <img src="https://levents.asia/template/assets/images/notification.png" alt="bell">
                     <input type="text" placeholder="Search"> <img
                         src="https://levents.asia/template/assets/images/svg/ic-ser.svg" alt="search">
-                    <img src="https://levents.asia/template/assets/images/svg/ic-cart.svg" alt="cart">
-                    <img src="https://levents.asia/template/assets/images/svg/ic-user.svg" alt="user">
+                    <a href="loadCart"><img src="https://levents.asia/template/assets/images/svg/ic-cart.svg" alt="cart"></a>
+                    <a href="login.jsp" ${style}> <img  src="https://levents.asia/template/assets/images/svg/ic-user.svg" alt="user"></a><br/>
+
                 </div>
             </div>
 

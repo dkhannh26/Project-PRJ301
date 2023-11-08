@@ -239,10 +239,34 @@
                 font-family: "SVN-Futura Medium", sans-serif;
             }
             .admin {
-             display: none;
+                display: none;
             }
 
-
+            .sale{
+                /*content: attr(stt);*/
+                background-color: #e2002a;
+                color: #fff;
+                min-width: 40px;
+                text-align: center;
+                padding: 3px;
+                font-size: 9px;
+                z-index: 9;
+                position: absolute;
+                top: 0;
+                left: 5px;
+            }
+            .filterimg{
+                margin: 0px -30px 5px 30px;
+            }
+            .filter {
+                color: white;
+                margin: 0 10px;
+                width: 80px;
+                border: none;
+                background: black;
+                height: 39px;
+                border-radius: 5px;
+            }
 
         </style>
     </head>
@@ -258,9 +282,16 @@
                 <div class="col-1">
                     ${logOutBtn}
                 </div>
-                <div class="col-3">
-                    ${email}
+                <div class="col-2">
+                    <p id="email">${email}</p>
+                    
                 </div>
+                <form action="addOrder" method="post">
+                    <div  class="none col-1" ${stylee}>
+
+                        <button type="submit">List order</button>
+                    </div>
+                </form>
                 <div class="col-4 logo">
                     <a href="index.jsp">DOTAI</a>
                 </div>
@@ -268,7 +299,7 @@
                     <img src="https://levents.asia/template/assets/images/notification.png" alt="bell">
                     <input type="text" placeholder="Search"> <img
                         src="https://levents.asia/template/assets/images/svg/ic-ser.svg" alt="search">
-                    <img src="https://levents.asia/template/assets/images/svg/ic-cart.svg" alt="cart">
+                    <a href="loadCart"><img src="https://levents.asia/template/assets/images/svg/ic-cart.svg" alt="cart"></a>
                     <a href="login.jsp" ${style}> <img  src="https://levents.asia/template/assets/images/svg/ic-user.svg" alt="user"></a><br/>
 
                 </div>
@@ -291,42 +322,106 @@
         <a href="addProduct.jsp" class="admin add" ${cssAdmin} >Add product</a>
     </center>
 
-     <form action="productList" method="post">
-         <input type="hidden" value="${email}" name="email"/>
-         <div style="display: flex;">
-        <select name="filterID" id="filter" class="form-control ml-5 mb-2">
-            <option value="Top">Top</option>
-            <option value="Bottom">Bottom</option>
-        </select>
-         <button type="submit" name="submit"  class="ml-3 filterBtn"> Filter</button>
-         </div>
+    <form action="productList" method="post">
+        <input type="hidden" value="${email}" name="email" />
+        <div style="display: flex; margin: 100px 0 20px 0;">
+            <img class="filterimg" src="https://levents.asia/template/assets/images/svg/ic-filter.svg" alt="">
+            <select name="filterID" id="filter" class="form-control ml-5 mb-2">
+                <option value="Top">Top</option>
+                <option value="Bottom">Bottom</option>
+            </select>
+            <button type="submit" name="submit"  class="filter"> Filter</button>
+        </div>
     </form>
     <!-- product list -->
-    <div class="product">
+    <div class="product ${admin}">
 
         <c:forEach items="${requestScope.listProduct}" var="product">
+            
+
+            <a onclick="checkLogin('${product.getPro_id()}')" href="#" class="product-link doimau">
+
+                <div class="col-3 item">
+                    <div class="sale">
+
+                        ${product.getPro_sale()}%
+                    </div>
+                    <img src="${product.getPro_pic()}" alt="levent">
+                    <p>${product.getPro_name()}</p>
+
+                    <!<!-- Tính số tiền trước khi giảm -->
+                    <c:set var="realPrice" value="${product.getPro_price() * (1 + (product.getPro_sale() / 100))}" />
+
+                    <!--định dạng price từ 100000 thành 100,000-->
+                    <c:set var="formattedPrice">
+                        <fmt:formatNumber type="number" value="${product.getPro_price()}" pattern="###,###" />
+                    </c:set>
+
+                    <c:set var="formattedRealPrice">
+                        <fmt:formatNumber type="number" value="${realPrice}" pattern="###,###" />
+                    </c:set>
+                    <!------------>
+                    <div style="display: flex"> 
+                        <p class="col-4" style="text-decoration: line-through;color: gray">${formattedRealPrice}vnđ </p>
+                        <p style="color: red;">${formattedPrice} vnđ</p>
+                    </div>
+
+                    <a ${cssAdmin} class="admin" href ="updateProduct?pro_id=${product.getPro_id()}">Update</a>
+                    <a ${cssAdmin} class="admin" href="#" onclick="doDelete('${product.getPro_id()}')">Delete </a> 
+
+
+                </div>
+            </a>
+        </c:forEach> 
+
+
+
+    </div>
+
+
+    <div class="product ${user}">
+
+        <c:forEach items="${requestScope.listProduct}" var="product">
+
+
+
             <div class="col-3 item">
-                <a href=""><img src="${product.getPro_pic()}" alt="levent"></a>
+                <div class="sale">
+
+                    ${product.getPro_sale()}%
+                </div>
+                <img src="${product.getPro_pic()}" alt="levent">
                 <p>${product.getPro_name()}</p>
+
+                <!<!-- Tính số tiền trước khi giảm -->
+                <c:set var="realPrice" value="${product.getPro_price() * (1 + (product.getPro_sale() / 100))}" />
 
                 <!--định dạng price từ 100000 thành 100,000-->
                 <c:set var="formattedPrice">
                     <fmt:formatNumber type="number" value="${product.getPro_price()}" pattern="###,###" />
                 </c:set>
+
+                <c:set var="formattedRealPrice">
+                    <fmt:formatNumber type="number" value="${realPrice}" pattern="###,###" />
+                </c:set>
                 <!------------>
+                <div style="display: flex"> 
+                    <p class="col-4" style="text-decoration: line-through;color: gray">${formattedRealPrice}vnđ </p>
+                    <p style="color: red;">${formattedPrice} vnđ</p>
+                </div>
 
-
-                <p>${formattedPrice} vnđ</p>
                 <a ${cssAdmin} class="admin" href ="updateProduct?pro_id=${product.getPro_id()}">Update</a>
                 <a ${cssAdmin} class="admin" href="#" onclick="doDelete('${product.getPro_id()}')">Delete </a> 
+
+
             </div>
         </c:forEach> 
 
-     
+
 
     </div>
 
- 
+
 
     <!-- footer -->
     <div class="footer">
@@ -505,6 +600,16 @@
         function doDelete(id) {
             if (confirm("Do you want to delete this product (" + id + ")?")) {
                 window.location = "deleteProduct?pro_id=" + id;
+            }
+        }
+        function checkLogin(id) {
+            var email2 = document.getElementById("email").value;
+            
+            if (email2===undefined) {
+                alert("Must be login first");
+            }else{
+                window.location = "detailProduct?sid=" + id;
+                
             }
         }
     </script>

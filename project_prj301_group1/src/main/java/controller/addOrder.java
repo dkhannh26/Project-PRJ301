@@ -4,7 +4,12 @@
  */
 package controller;
 
+import DAO.DAOcart;
+import DAO.DAOorder;
 import DAO.DAOproduct;
+import entity.cart;
+import entity.order;
+import entity.product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,14 +18,14 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  *
- * @author LENOVO
+ * @author thinh
  */
-@WebServlet(name = "deleteProduct", urlPatterns = "/deleteProduct")
-public class deleteProduct extends HttpServlet {
+@WebServlet(name = "addOrder", urlPatterns = {"/addOrder"})
+public class addOrder extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +44,10 @@ public class deleteProduct extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet deleteServlet</title>");
+            out.println("<title>Servlet addOrder</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet deleteServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet addOrder at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,13 +65,41 @@ public class deleteProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String pro_id = request.getParameter("pro_id");
-        DAOproduct dao = new DAOproduct();
-        dao.delete(pro_id);
-        
-
-
-        response.sendRedirect("productList");
+//        processRequest(request, response);
+        String username = "";
+        String name = "";
+        Cookie arr[] = request.getCookies();
+        for (Cookie o : arr) {
+            if (o.getName().equals("userC")) {
+                username = o.getValue();
+            }
+        }
+        int totalQ = 0;
+        int totalQ2 = 0;
+        DAOorder order = new DAOorder();
+        List<order> list = order.getAll();
+        DAOcart cart = new DAOcart();
+        List<cart> list2 = cart.getAll(username);
+        DAOproduct product = new DAOproduct();
+        List<product> list3 = product.getAll();
+        for (int i = 0; i < list2.size(); i++) {
+            name = list2.get(i).getOrder_name();
+            int quan = list2.get(i).getOrder_quan();
+            totalQ = totalQ + quan;
+            int price = list2.get(i).getOrder_price();
+            String address = list2.get(i).getAddress();
+            String phone = list2.get(i).getPhoneNumber();
+            String pic = list2.get(i).getOrder_pic();
+            order.insertOrder(username, quan, price, address, phone, name, pic);
+            cart.deleteCart(username, name, address, phone);
+        }
+        for (int i = 0; i < list3.size(); i++) {
+            if (name.equals(list3.get(i).getPro_name())) {
+                totalQ2 = list3.get(i).getPro_quan() - totalQ;
+                product.updateQuan(totalQ2, list3.get(i).getPro_id());
+            }
+        }
+        response.sendRedirect("final.jsp");
     }
 
     /**
@@ -80,7 +113,26 @@ public class deleteProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+        DAOorder o = new DAOorder();
+        List<order> list = o.getAll();
+        
+        String username = "";
+        Cookie arr[] = request.getCookies();
+        for (Cookie a : arr) {
+            if (a.getName().equals("userC")) {
+                username = a.getValue();
+            }
+        }
+        int sum = 0;
+        for (int i = 0; i < list.size(); i++) {
+            sum = sum + list.get(i).getOrder_price();
+        }
+        request.setAttribute("sum", sum);
+
+        request.setAttribute("list", list);
+        request.getRequestDispatcher("orderInfo.jsp").forward(request, response);
+
     }
 
     /**

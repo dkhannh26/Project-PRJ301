@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -60,7 +61,21 @@ public class detailProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
+        String username = "";
+        Cookie arr[] = request.getCookies();
+        boolean check = true;
+        for (Cookie o : arr) {
+            if (o.getName().equals("userC")) {
+                username = o.getValue();
+                check = false;
+            }
+        }
+        
+        if(check){
+            
+        }
         String id = request.getParameter("sid");
+
         DAOproduct product = new DAOproduct();
         List<product> list = product.getAll();
         product p = product.getProductById(id);

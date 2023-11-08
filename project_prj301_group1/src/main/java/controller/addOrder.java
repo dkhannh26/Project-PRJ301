@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import DAO.DAOcart;
@@ -25,36 +24,39 @@ import java.util.List;
  *
  * @author thinh
  */
-@WebServlet(name="addOrder", urlPatterns={"/addOrder"})
+@WebServlet(name = "addOrder", urlPatterns = {"/addOrder"})
 public class addOrder extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet addOrder</title>");  
+            out.println("<title>Servlet addOrder</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet addOrder at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet addOrder at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -62,9 +64,9 @@ public class addOrder extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
 //        processRequest(request, response);
-String username = "";
+        String username = "";
         String name = "";
         Cookie arr[] = request.getCookies();
         for (Cookie o : arr) {
@@ -92,16 +94,17 @@ String username = "";
             cart.deleteCart(username, name, address, phone);
         }
         for (int i = 0; i < list3.size(); i++) {
-            if(name.equals(list3.get(i).getPro_name())){
+            if (name.equals(list3.get(i).getPro_name())) {
                 totalQ2 = list3.get(i).getPro_quan() - totalQ;
                 product.updateQuan(totalQ2, list3.get(i).getPro_id());
             }
         }
         response.sendRedirect("final.jsp");
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -109,12 +112,32 @@ String username = "";
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
+            throws ServletException, IOException {
+//        processRequest(request, response);
+        DAOorder o = new DAOorder();
+        List<order> list = o.getAll();
+        
+        String username = "";
+        Cookie arr[] = request.getCookies();
+        for (Cookie a : arr) {
+            if (a.getName().equals("userC")) {
+                username = a.getValue();
+            }
+        }
+        int sum = 0;
+        for (int i = 0; i < list.size(); i++) {
+            sum = sum + list.get(i).getOrder_price();
+        }
+        request.setAttribute("sum", sum);
+
+        request.setAttribute("list", list);
+        request.getRequestDispatcher("orderInfo.jsp").forward(request, response);
+
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

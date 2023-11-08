@@ -220,7 +220,9 @@
             }
 
 
-
+            .none {
+                display: none;
+            }
 
         </style>
     </head>
@@ -236,9 +238,16 @@
                 <div class="col-1">
                     ${logOutBtn}
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                     ${email}
                 </div>
+                <form action="addOrder" method="post">
+                    <div  class="none col-1" ${stylee}>
+
+                  <button type="submit">List order</button>
+                </div>
+                </form>
+                
                 <div class="col-4 logo">
                     <a href="">DOTAI</a>
                 </div>

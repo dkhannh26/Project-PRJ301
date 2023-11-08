@@ -101,7 +101,6 @@ public class loginServlet extends HttpServlet {
 
 //                request.setAttribute("password", o.getValue());
             }
-            
 
         }
         HttpSession session = request.getSession();
@@ -110,7 +109,8 @@ public class loginServlet extends HttpServlet {
         session.setAttribute("style", style);
         String logOutBtn = "";
         session.setAttribute("logOutBtn", logOutBtn);
-
+        String stylee = "style=\"display:none;\"";
+        session.setAttribute("stylee", stylee);
         response.sendRedirect("home");
     }
 
@@ -153,10 +153,18 @@ public class loginServlet extends HttpServlet {
                 response.addCookie(u);
                 response.addCookie(e);
                 response.addCookie(p);
+
                 String style = "style=\"display:none;\"";
                 session.setAttribute("style", style);
+
                 String logOutBtn = "<a href =\"loginServlet\" >Log out</a>";
                 session.setAttribute("logOutBtn", logOutBtn);
+
+                if (email.equals("thinhldce171774@fpt.edu.vn")) {
+
+                    String stylee = "style=\"display:inline;\"";
+                    session.setAttribute("stylee", stylee);
+                }
 
                 response.sendRedirect("home");
             }

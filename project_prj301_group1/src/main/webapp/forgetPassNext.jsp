@@ -196,7 +196,7 @@
                     <div class="answer">
                         <input class="send" name="submit" type="Submit" value="Next">
 
-                        <p>${message}</p>
+                        <p style="color: red">${message}</p>
                         <div class="signup_link">
                             Not a Member ? <a href="signUp.jsp">Signup</a>
                         </div>

@@ -223,6 +223,9 @@
             .none {
                 display: none;
             }
+            .admin{
+                display: none;
+            }
 
         </style>
     </head>
@@ -235,6 +238,7 @@
             <!-- thanh tiêu đề-->
 
             <div class="home">
+              
                 <div class="col-1">
                     ${logOutBtn}
                 </div>
@@ -249,13 +253,17 @@
                 </form>
                 
                 <div class="col-4 logo">
-                    <a href="">DOTAI</a>
+                    <a href="home">DOTAI</a>
                 </div>
                 <div class="col-4 home-menu">
                     <img src="https://levents.asia/template/assets/images/notification.png" alt="bell">
-                    <input type="text" placeholder="Search"> <img
-                        src="https://levents.asia/template/assets/images/svg/ic-ser.svg" alt="search">                   
-                    <a href="loadCart"><img src="https://levents.asia/template/assets/images/svg/ic-cart.svg" alt="cart"></a>
+                   <form action="search" style="display:inline;">
+                    <input type="text" placeholder="Search" name="search"/> <button id="search" style="background-color: white !important; border: none !important;" type="submit">
+                            <img
+                        src="https://levents.asia/template/assets/images/svg/ic-ser.svg" alt="search">
+                            </button>
+                    </form>           
+                    <a href="loadCart" class="${admin}" ><img src="https://levents.asia/template/assets/images/svg/ic-cart.svg" alt="cart"></a>
                     <a href="login.jsp" ${style}> <img  src="https://levents.asia/template/assets/images/svg/ic-user.svg" alt="user"></a><br/>
 
                 </div>
@@ -265,12 +273,12 @@
             <!-- thanh menu -->
             <div class="menu">
                 <ul>
-                    <li><a href="page?pageId=aboutUs&&email=${email}">About Us</a></li>
+                    <li><a href="hideCart?email=${email}">About Us</a></li>
                     <li><a href="productList?email=${email}">Products</a></li>
                     <li><a href="sale?email=${email}">Sale</a></li>
-                    <li><a href="page?pageId=contact&&email=${email}">Contact</a></li>
-                    <li><a href="page?pageId=customer&&email=${email}">Customer Service</a></li>
-                    <li><a href="page?pageId=recruitment&&email=${email}">Recruitment</a></li>
+                    <li><a href="hideCart2?email=${email}">Contact</a></li>
+                    <li><a href="hideCart3?email=${email}">Customer Service</a></li>
+                    <li><a href="hideCart4?email=${email}">Recruitment</a></li>
                 </ul>
             </div>
         </div>

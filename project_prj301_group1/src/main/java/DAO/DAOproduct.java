@@ -152,6 +152,24 @@ public class DAOproduct extends connnectDB.connectDB {
         } catch (Exception e) {
         }
     }
+      public List<product> search(String pro_name) {
+        List<product> list = new ArrayList<>();
+        String sql = "select * from product \n"
+                + "where pro_name like ? ";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, pro_name);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                product p = new product(rs.getInt("type"), rs.getInt("pro_quan"), rs.getInt("pro_id"), rs.getString("pro_name"),
+                        rs.getInt("pro_sale"), rs.getInt("pro_price"), rs.getString("pro_pic"), rs.getString("pro_des"));
+                list.add(p);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
 
     public void updateQuan(int quan, int id) {
         String sql = "update product\n"

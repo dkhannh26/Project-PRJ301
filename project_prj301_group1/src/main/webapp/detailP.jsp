@@ -22,7 +22,7 @@
         <!-- Nút "Back to List" -->
         <a href="home" class="btn btn-primary mt-3">Back to List</a>
 
-        <form action="addCart" method="post">
+        <form action="addCart" method="post" id="detailP">
             <div class="row">
                 <div class="col-md-6">
                     <img src="${p.pro_pic}" class="img-fluid" alt="Hình sản phẩm">
@@ -39,7 +39,7 @@
                     <input type="text" name="quantity" id="quantityInput" value="1" style="display: none;">
                     <div class="form-group">
                         <label for="phoneNumber">Số điện thoại:</label>
-                        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"
+                        <input type="number" class="form-control" id="phoneNumber" name="phoneNumber"
                             placeholder="Nhập số điện thoại" required>
                     </div>
                     <div class="form-group">
@@ -77,7 +77,9 @@
             </div>
         </div>
     </div>
-
+       
+      <script src="js/jquery-3.7.0.min.js"></script> 
+      <script src="js/jquery.validate.min.js"></script> 
     <script>
         function increaseQuantity() {
             var quantity = parseInt(document.getElementById("quantity").textContent);
@@ -94,7 +96,30 @@
                 document.getElementById("quantityInput").value = quantity - 1;
             }
         }
+        
+        
+         var validator = $("#detailP").validate(
+                    {
+                        rules: {
+                            phoneNumber: {
+                                required: true,
+                                minlength: 10
+                            },
+                            address: "required"
+
+                        },
+                        messages: {
+                            phoneNumber: {
+                                required: "Phone number is required"
+                            },
+                            address: "Address is required"
+
+                        }
+                    }
+            );
     </script>
+    
+     
 </body>
 
 </html>

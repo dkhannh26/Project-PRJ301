@@ -259,7 +259,7 @@
             <!-- thanh tiêu đề-->
 
             <div class="home">
-                 <div class="col-1">
+                <div class="col-1">
                     ${logOutBtn}
                 </div>
                 <div class="col-3">
@@ -296,7 +296,7 @@
         <div class="container">
             <div class="center">
                 <h1>Login</h1>
-                <form action="loginServlet" method="POST" id="addForm">
+                <form action="loginServlet" method="POST" id="loginForm">
                     <div class="txt_field">
                         <input type="text" placeholder="User" name="username" id="username" required>
                         <span></span>
@@ -478,8 +478,22 @@
         <script src="js/jquery-3.7.0.min.js"></script> 
         <script src="js/jquery.validate.min.js"></script> 
         <script >
-            $("#addForm").validate();
-                    </script >
+            var validator = $("#loginForm").validate(
+                    {
+                        rules: {
+                            username: "required",
+                            password: "required"
+
+                        },
+                        messages: {
+                            username: "Username is required",
+                            password: "Password is required"
+
+                        }
+                    }
+            );
+
+            </script >
                     </body>
 
             </html>

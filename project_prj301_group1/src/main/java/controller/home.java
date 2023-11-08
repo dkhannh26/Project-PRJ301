@@ -63,7 +63,7 @@ public class home extends HttpServlet {
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("email");
         request.setAttribute("email", email);
-      
+
 //        String logOutBtn = "<a href =\"loginServlet\" >Log out</a>";
         String logOutBtn = (String) session.getAttribute("logOutBtn");
         request.setAttribute("logOutBtn", logOutBtn);
@@ -74,6 +74,31 @@ public class home extends HttpServlet {
         DAOproduct product = new DAOproduct();
         List<product> list = product.getAll();
         request.setAttribute("list", list);
+        if (email == null) {
+            String admin = "admin";
+
+            request.setAttribute("admin", admin);
+        }
+        if(email == ""){
+            String admin = "admin";
+
+            request.setAttribute("admin", admin);
+        }
+        if (email != null) {
+            if (email.equals("thinhldce171774@fpt.edu.vn")) {
+                String cssAdmin = "style=\"display: inline;\"";
+                request.setAttribute("cssAdmin", cssAdmin);
+                String admin = "admin";
+
+                request.setAttribute("admin", admin);
+
+            } else {
+                String user = "user";
+
+                request.setAttribute("user", user);
+            }
+        }
+        System.out.println(email);
         request.getRequestDispatcher("index.jsp").forward(request, response);
 
     }

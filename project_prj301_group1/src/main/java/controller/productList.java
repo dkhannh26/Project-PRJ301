@@ -48,6 +48,8 @@ public class productList extends HttpServlet {
         DAOproduct dao = new DAOproduct();
 
         List<product> listProduct = dao.getAll();
+        request.setAttribute("listProduct", listProduct);
+
 //        for (product object : listProduct) {
 //            if(object.getPro_sale() ==0){
 //                String style = "style=\"display: none\"";
@@ -55,28 +57,32 @@ public class productList extends HttpServlet {
 //            }
 //        }
         String email = "";
+        String user = "";
         Cookie arr[] = request.getCookies();
         for (Cookie o : arr) {
             if (o.getName().equals("email")) {
                 email = o.getValue();
             }
         }
-        if (email.equals("thinhldce171774@fpt.edu.vn")) {
-            String cssAdmin = "style=\"display: inline;\"";
-            request.setAttribute("cssAdmin", cssAdmin);
+        if (email == null || email.isEmpty()) {
             String admin = "admin";
-            
-
             request.setAttribute("admin", admin);
-            
-
         } else {
-            String user = "user";
-            
-            request.setAttribute("user", user);
-        }
+            if (email.equals("thinhldce171774@fpt.edu.vn")) {
+                String cssAdmin = "style=\"display: inline;\"";
+                request.setAttribute("cssAdmin", cssAdmin);
+                String admin = "admin";
 
-        request.setAttribute("listProduct", listProduct);
+                request.setAttribute("admin", admin);
+
+            } else {
+                 user = "user";
+
+                request.setAttribute("user", user);
+            }
+        }
+        System.out.println(email);
+        System.out.println(user);
         request.getRequestDispatcher("product.jsp").forward(request, response);
     }
 

@@ -270,6 +270,9 @@
             .none{
                 display: none;
             }
+            .user {
+                display: none;
+            }
         </style>
     </head>
     <body>
@@ -313,7 +316,8 @@
                 <ul>
                     <li><a href="page?pageId=aboutUs&&email=${email}">About Us</a></li>
                     <li><a href="productList?email=${email}">Products</a></li>
-                    <li><a href="page?pageId=aboutUs&&email=${email}">Sale</a></li>
+                                        <li><a href="sale?email=${email}">Sale</a></li>
+
                     <li><a href="page?pageId=contact&&email=${email}">Contact</a></li>
                     <li><a href="page?pageId=customer&&email=${email}">Customer Service</a></li>
                     <li><a href="page?pageId=recruitment&&email=${email}">Recruitment</a></li>

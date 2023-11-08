@@ -267,7 +267,9 @@
                 height: 39px;
                 border-radius: 5px;
             }
-
+            .none{
+                display: none;
+            }
         </style>
     </head>
     <body>
@@ -283,8 +285,8 @@
                     ${logOutBtn}
                 </div>
                 <div class="col-2">
-                    <p id="email">${email}</p>
-                    
+                    <input style="width: 100%;border: none" name="mail" value="${email}" id="mail">
+
                 </div>
                 <form action="addOrder" method="post">
                     <div  class="none col-1" ${stylee}>
@@ -337,7 +339,7 @@
     <div class="product ${admin}">
 
         <c:forEach items="${requestScope.listProduct}" var="product">
-            
+
 
             <a onclick="checkLogin('${product.getPro_id()}')" href="#" class="product-link doimau">
 
@@ -603,13 +605,12 @@
             }
         }
         function checkLogin(id) {
-            var email2 = document.getElementById("email").value;
-            
-            if (email2===undefined) {
+            var email2 = document.getElementById("mail").value;
+            if (email2 === '') {
                 alert("Must be login first");
-            }else{
+            } else {
                 window.location = "detailProduct?sid=" + id;
-                
+
             }
         }
     </script>

@@ -173,6 +173,9 @@
                 background-color: #c0c0c0;
                 padding: 15px;
             }
+            .none{
+                display: none;
+            }
         </style>
     </head>
 

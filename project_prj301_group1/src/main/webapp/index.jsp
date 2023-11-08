@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -222,12 +223,11 @@
 
 
         </style>
-       
     </head>
     <body>
         <div class="header">
             <div class="top">
-                <h1>RELEASE OFFICIAL DOTAI® CLASSIC NEW PRODUCT LINE 2023zzxc</h1>
+                <h1>RELEASE OFFICIAL DOTAI® CLASSIC NEW PRODUCT LINE 2023</h1>
             </div>
 
             <!-- thanh tiêu đề-->
@@ -245,14 +245,13 @@
                 <div class="col-4 home-menu">
                     <img src="https://levents.asia/template/assets/images/notification.png" alt="bell">
                     <input type="text" placeholder="Search"> <img
-                        src="https://levents.asia/template/assets/images/svg/ic-ser.svg" alt="search">
-                    <img src="https://levents.asia/template/assets/images/svg/ic-cart.svg" alt="cart">
+                        src="https://levents.asia/template/assets/images/svg/ic-ser.svg" alt="search">                   
+                    <a href="loadCart"><img src="https://levents.asia/template/assets/images/svg/ic-cart.svg" alt="cart"></a>
                     <a href="login.jsp" ${style}> <img  src="https://levents.asia/template/assets/images/svg/ic-user.svg" alt="user"></a><br/>
 
                 </div>
             </div>
-                    
-                    
+
 
             <!-- thanh menu -->
             <div class="menu">
@@ -280,59 +279,21 @@
         </div>
 
         <!-- product list -->
+        
         <div class="product">
+            <c:forEach items="${list}" var="obj2">
             <div class="col-3">
-                <a href=""><img src="https://levents.asia/wp-content/uploads/2023/08/MT-3-2048x2048.jpg" alt="levent"></a>
-                <p>DOTAI® AIRPLANE TEE/ WHITE</p>
-                <p>380,000 vnđ</p>
+                <a href="detailProduct?sid=${obj2.pro_id}"><img src="${obj2.pro_pic}" alt="levent"></a>
+                <p>${obj2.pro_name}</p>
+                <p>${obj2.pro_price}vnd</p>
             </div>
-
-            <div class="col-3">
-                <a href=""><img src="https://levents.asia/wp-content/uploads/2023/08/MT-5-2048x2048.jpg" alt="levent"></a>
-                <p>DOTAI® LOVE BOXY ZIPPER HOODIE/ BLACK</p>
-                <p>620,000 vnđ</p>
-            </div>
-
-            <div class="col-3">
-                <a href=""><img src="https://levents.asia/wp-content/uploads/2023/08/MT-10-2048x2048.jpg" alt="levent"></a>
-                <p>DOTAI® CLASSIC BLOCK JACKET/ BLACK</p>
-                <p>630,000 vnđ</p>
-            </div>
-
-            <div class="col-3">
-                <a href=""><img src="https://levents.asia/wp-content/uploads/2023/08/MT-6-2048x2048.jpg" alt="levent"></a>
-                <p>DOTAI® CLASSIC WASH STRAIGHT JEANS/ BLACK</p>
-                <p>610,000 vnđ</p>
-            </div>
-
-            <div class="col-3">
-                <a href=""><img src="https://levents.asia/wp-content/uploads/2023/08/MT-8-2048x2048.jpg" alt="levent"></a>
-                <p>DOTAI® BOOK BOXY TEE/ WHITE</p>
-                <p>430,000 vnđ</p>
-            </div>
-
-            <div class="col-3">
-                <a href=""><img src="https://levents.asia/wp-content/uploads/2023/08/MT-7-2048x2048.jpg" alt="levent"></a>
-                <p>DOTAI® BOOK BOXY TEE/ BLACK</p>
-                <p>380,000 vnđ</p>
-            </div>
-
-            <div class="col-3">
-                <a href=""><img src="https://levents.asia/wp-content/uploads/2023/08/MT-9-2048x2048.jpg" alt="levent"></a>
-                <p>DOTAI® BOOK SWEATER/ CREAM</p>
-                <p>510,000 vnđ</p>
-            </div>
-
-            <div class="col-3">
-                <a href=""><img src="https://levents.asia/wp-content/uploads/2023/08/MT-4-2048x2048.jpg" alt="levent"></a>
-                <p>DOTAI® CLASSIC MINI SHOULDER BAG/ BLACK</p>
-                <p>370,000 vnđ</p>
-            </div>
+            </c:forEach>
         </div>
+            
 
         <!-- xem thêm -->
         <div class="xemthem"">
-            <a href="productList">Xem thêm</a>
+            <a href="">Xem thêm</a>
         </div>
 
         <!-- map and hỗ trợ -->

@@ -4,7 +4,8 @@
  */
 package controller;
 
-import DAO.DAOproduct;
+import DAO.DAOcart;
+import entity.cart;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,14 +14,14 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  *
- * @author LENOVO
+ * @author thinh
  */
-@WebServlet(name = "deleteProduct", urlPatterns = "/deleteProduct")
-public class deleteProduct extends HttpServlet {
+@WebServlet(name = "loadCart", urlPatterns = {"/loadCart"})
+public class loadCart extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +40,10 @@ public class deleteProduct extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet deleteServlet</title>");
+            out.println("<title>Servlet loadCart</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet deleteServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet loadCart at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,13 +61,23 @@ public class deleteProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String pro_id = request.getParameter("pro_id");
-        DAOproduct dao = new DAOproduct();
-        dao.delete(pro_id);
-        
-
-
-        response.sendRedirect("productList");
+//        processRequest(request, response);
+        String username = "";
+        Cookie arr[] = request.getCookies();
+        for (Cookie o : arr) {
+            if (o.getName().equals("userC")) {
+                username = o.getValue();
+            }
+        }
+        DAOcart cart = new DAOcart();
+        List<cart> list = cart.getAll(username);
+        int sum = 0;
+        for (int i = 0; i < list.size(); i++) {
+            sum = sum + list.get(i).getOrder_price();
+        }
+        request.setAttribute("sum", sum);
+        request.setAttribute("list", list);
+        request.getRequestDispatcher("cartInfo.jsp").forward(request, response);
     }
 
     /**

@@ -2,25 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
 
 import DAO.DAOproduct;
+import entity.product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  *
- * @author LENOVO
+ * @author thinh
  */
-@WebServlet(name = "deleteProduct", urlPatterns = "/deleteProduct")
-public class deleteProduct extends HttpServlet {
+@WebServlet(urlPatterns = {"/detailProduct"})
+public class detailProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +38,10 @@ public class deleteProduct extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet deleteServlet</title>");
+            out.println("<title>Servlet detailProduct</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet deleteServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet detailProduct at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,13 +59,14 @@ public class deleteProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String pro_id = request.getParameter("pro_id");
-        DAOproduct dao = new DAOproduct();
-        dao.delete(pro_id);
-        
-
-
-        response.sendRedirect("productList");
+//        processRequest(request, response);
+        String id = request.getParameter("sid");
+        DAOproduct product = new DAOproduct();
+        List<product> list = product.getAll();
+        product p = product.getProductById(id);
+        request.setAttribute("p", p);
+        System.out.println(p);
+        request.getRequestDispatcher("detailP.jsp").forward(request, response);
     }
 
     /**

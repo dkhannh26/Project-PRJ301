@@ -239,10 +239,22 @@
                 font-family: "SVN-Futura Medium", sans-serif;
             }
             .admin {
-             display: none;
+                display: none;
             }
 
-
+            .sale{
+                /*content: attr(stt);*/
+                background-color: #e2002a;
+                color: #fff;
+                min-width: 30px;
+                text-align: center;
+                padding: 0px 4px;
+                font-size: 9px;
+                z-index: 9;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
 
         </style>
     </head>
@@ -291,42 +303,104 @@
         <a href="addProduct.jsp" class="admin add" ${cssAdmin} >Add product</a>
     </center>
 
-     <form action="productList" method="post">
-         <input type="hidden" value="${email}" name="email"/>
-         <div style="display: flex;">
-        <select name="filterID" id="filter" class="form-control ml-5 mb-2">
-            <option value="Top">Top</option>
-            <option value="Bottom">Bottom</option>
-        </select>
-         <button type="submit" name="submit"  class="ml-3 filterBtn"> Filter</button>
-         </div>
+    <form action="productList" method="post">
+        <input type="hidden" value="${email}" name="email"/>
+        <div style="display: flex;">
+            <select name="filterID" id="filter" class="form-control ml-5 mb-2">
+                <option value="Top">Top</option>
+                <option value="Bottom">Bottom</option>
+            </select>
+            <button type="submit" name="submit"  class="ml-3 filterBtn"> Filter</button>
+        </div>
     </form>
     <!-- product list -->
-    <div class="product">
+    <div class="product ${admin}">
 
         <c:forEach items="${requestScope.listProduct}" var="product">
-            <div class="col-3 item">
-                <a href=""><img src="${product.getPro_pic()}" alt="levent"></a>
-                <p>${product.getPro_name()}</p>
+            
+            <a  href="detailProduct?sid=${product.getPro_id()}" class="product-link doimau">
 
-                <!--định dạng price từ 100000 thành 100,000-->
-                <c:set var="formattedPrice">
-                    <fmt:formatNumber type="number" value="${product.getPro_price()}" pattern="###,###" />
-                </c:set>
-                <!------------>
+                <div class="col-3 item">
+                    <div class="sale">
+
+                        ${product.getPro_sale()}%
+                    </div>
+                    <img src="${product.getPro_pic()}" alt="levent">
+                    <p>${product.getPro_name()}</p>
+
+                    <!<!-- Tính số tiền trước khi giảm -->
+                    <c:set var="realPrice" value="${product.getPro_price() * (1 + (product.getPro_sale() / 100))}" />
+
+                    <!--định dạng price từ 100000 thành 100,000-->
+                    <c:set var="formattedPrice">
+                        <fmt:formatNumber type="number" value="${product.getPro_price()}" pattern="###,###" />
+                    </c:set>
+
+                    <c:set var="formattedRealPrice">
+                        <fmt:formatNumber type="number" value="${realPrice}" pattern="###,###" />
+                    </c:set>
+                    <!------------>
+                    <div style="display: flex"> 
+                        <p class="col-4" style="text-decoration: line-through;color: gray">${formattedRealPrice}vnđ </p>
+                        <p style="color: red;">${formattedPrice} vnđ</p>
+                    </div>
+
+                    <a ${cssAdmin} class="admin" href ="updateProduct?pro_id=${product.getPro_id()}">Update</a>
+                    <a ${cssAdmin} class="admin" href="#" onclick="doDelete('${product.getPro_id()}')">Delete </a> 
 
 
-                <p>${formattedPrice} vnđ</p>
-                <a ${cssAdmin} class="admin" href ="updateProduct?pro_id=${product.getPro_id()}">Update</a>
-                <a ${cssAdmin} class="admin" href="#" onclick="doDelete('${product.getPro_id()}')">Delete </a> 
-            </div>
-        </c:forEach> 
+                </div>
+            </a>
+            </c:forEach> 
 
-     
+
+
+    </div>
+    
+    
+    <div class="product ${user}">
+
+        <c:forEach items="${requestScope.listProduct}" var="product">
+            
+            
+
+                <div class="col-3 item">
+                    <div class="sale">
+
+                        ${product.getPro_sale()}%
+                    </div>
+                    <img src="${product.getPro_pic()}" alt="levent">
+                    <p>${product.getPro_name()}</p>
+
+                    <!<!-- Tính số tiền trước khi giảm -->
+                    <c:set var="realPrice" value="${product.getPro_price() * (1 + (product.getPro_sale() / 100))}" />
+
+                    <!--định dạng price từ 100000 thành 100,000-->
+                    <c:set var="formattedPrice">
+                        <fmt:formatNumber type="number" value="${product.getPro_price()}" pattern="###,###" />
+                    </c:set>
+
+                    <c:set var="formattedRealPrice">
+                        <fmt:formatNumber type="number" value="${realPrice}" pattern="###,###" />
+                    </c:set>
+                    <!------------>
+                    <div style="display: flex"> 
+                        <p class="col-4" style="text-decoration: line-through;color: gray">${formattedRealPrice}vnđ </p>
+                        <p style="color: red;">${formattedPrice} vnđ</p>
+                    </div>
+
+                    <a ${cssAdmin} class="admin" href ="updateProduct?pro_id=${product.getPro_id()}">Update</a>
+                    <a ${cssAdmin} class="admin" href="#" onclick="doDelete('${product.getPro_id()}')">Delete </a> 
+
+
+                </div>
+            </c:forEach> 
+
+
 
     </div>
 
- 
+
 
     <!-- footer -->
     <div class="footer">

@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import entity.product;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 
 /**
  *
@@ -47,11 +48,32 @@ public class productList extends HttpServlet {
         DAOproduct dao = new DAOproduct();
 
         List<product> listProduct = dao.getAll();
-
-        String email = request.getParameter("email");
+//        for (product object : listProduct) {
+//            if(object.getPro_sale() ==0){
+//                String style = "style=\"display: none\"";
+//                request.setAttribute("style", style);
+//            }
+//        }
+        String email = "";
+        Cookie arr[] = request.getCookies();
+        for (Cookie o : arr) {
+            if (o.getName().equals("email")) {
+                email = o.getValue();
+            }
+        }
         if (email.equals("thinhldce171774@fpt.edu.vn")) {
             String cssAdmin = "style=\"display: inline;\"";
             request.setAttribute("cssAdmin", cssAdmin);
+            String admin = "admin";
+            
+
+            request.setAttribute("admin", admin);
+            
+
+        } else {
+            String user = "user";
+            
+            request.setAttribute("user", user);
         }
 
         request.setAttribute("listProduct", listProduct);

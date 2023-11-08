@@ -4,22 +4,26 @@
  */
 package controller;
 
+import DAO.DAOcart;
 import DAO.DAOproduct;
+import entity.cart;
 import entity.product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 /**
  *
- * @author LENOVO
+ * @author thinh
  */
-public class home extends HttpServlet {
+@WebServlet(name = "increaseQuan", urlPatterns = {"/increaseQuan"})
+public class increaseQuan extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +42,10 @@ public class home extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet home</title>");
+            out.println("<title>Servlet increaseQuan</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet home at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet increaseQuan at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,22 +64,61 @@ public class home extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
-        HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("email");
-        request.setAttribute("email", email);
-      
-//        String logOutBtn = "<a href =\"loginServlet\" >Log out</a>";
-        String logOutBtn = (String) session.getAttribute("logOutBtn");
-        request.setAttribute("logOutBtn", logOutBtn);
-//          String style ="style=\"display:none;\"";
-//          
-        String style = (String) session.getAttribute("style");
-        request.setAttribute("style", style);
+        int totalP = 0;
+        int priceP = 0;
+        int totalPrice = 0;
+        int totalQ = 0;
+        int quantity = 0;
+        String pic = "";
+        int sum = 0;
+        String ms = "<script>\n"
+                + "        alert(\"Sold out!\")\n"
+                + "    </script>";
+        String username = "";
+        Cookie arr[] = request.getCookies();
+        for (Cookie o : arr) {
+            if (o.getName().equals("userC")) {
+                username = o.getValue();
+            }
+        }
+        String name = request.getParameter("sid");
+        String address = request.getParameter("address");
+        String phone = request.getParameter("phoneNumber");
+        String quan = request.getParameter("quantity");
+        int quantity2 = Integer.parseInt(quan);
         DAOproduct product = new DAOproduct();
-        List<product> list = product.getAll();
-        request.setAttribute("list", list);
-        request.getRequestDispatcher("index.jsp").forward(request, response);
-
+        List<product> list2 = product.getAll();
+        DAOcart cart = new DAOcart();
+        List<cart> list = cart.getAll(username);
+        for (int i = 0; i < list.size(); i++) {
+            sum = sum + list.get(i).getOrder_price();
+        }
+        for (int i = 0; i < list2.size(); i++) {
+            if (name.equals(list2.get(i).getPro_name())) {
+                totalP = list2.get(i).getPro_quan();
+                priceP = list2.get(i).getPro_price();
+                pic = list2.get(i).getPro_pic();
+            }
+        }
+        for (int i = 0; i < list.size(); i++) {
+            if (name.equals(list.get(i).getOrder_name())) {
+                quantity = quantity + list.get(i).getOrder_quan();
+            }
+        }
+        for (int i = 0; i < list.size(); i++) {
+            if (name.equals(list.get(i).getOrder_name()) && address.equals(list.get(i).getAddress()) && phone.equals(list.get(i).getPhoneNumber()) && username.equals(list.get(i).getUsername())) {
+                if (quantity < totalP) {
+                    totalPrice = priceP * quantity2;
+                    cart.updateCart(username, quantity2, totalPrice, address, phone, name, pic);
+                    response.sendRedirect("loadCart");
+                } else {
+                    request.setAttribute("sum", sum);
+                    request.setAttribute("list", list);
+                    request.setAttribute("ms", ms);
+                    request.getRequestDispatcher("cartInfo.jsp").forward(request, response);
+                }
+            }
+        }
     }
 
     /**

@@ -95,6 +95,13 @@ public class loginServlet extends HttpServlet {
 
 //                request.setAttribute("password", o.getValue());
             }
+            if (o.getName().equals("email")) {
+                o.setMaxAge(0);
+                response.addCookie(o);
+
+//                request.setAttribute("password", o.getValue());
+            }
+            
 
         }
         HttpSession session = request.getSession();
@@ -141,15 +148,16 @@ public class loginServlet extends HttpServlet {
                 Cookie p = new Cookie("passC", password);
                 u.setMaxAge(60 * 60 * 24 * 3);
                 p.setMaxAge(60 * 60 * 24 * 3);
+                Cookie e = new Cookie("email", email);
+                u.setMaxAge(60 * 60 * 24 * 3);
                 response.addCookie(u);
+                response.addCookie(e);
                 response.addCookie(p);
                 String style = "style=\"display:none;\"";
                 session.setAttribute("style", style);
                 String logOutBtn = "<a href =\"loginServlet\" >Log out</a>";
                 session.setAttribute("logOutBtn", logOutBtn);
-                
-                
-                
+
                 response.sendRedirect("home");
             }
         }

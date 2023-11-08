@@ -89,7 +89,7 @@ public class updateProduct extends HttpServlet {
             String pro_quan = request.getParameter("pro_quan");
             String pro_id = request.getParameter("pro_id");
             String pro_name = request.getParameter("pro_name");
-            String pro_sale = request.getParameter("pro_price");
+            String pro_sale = request.getParameter("pro_sale");
             String pro_price = request.getParameter("pro_price");
             String pro_pic = request.getParameter("pro_pic");
             String pro_des = request.getParameter("pro_des");

@@ -270,6 +270,9 @@
             .none{
                 display: none;
             }
+            .user {
+                display: none;
+            }
         </style>
     </head>
     <body>

@@ -214,8 +214,8 @@
                 <form action="addOrder" method="post">
                     <div  class="none col-1" ${stylee}>
 
-                  <button type="submit">List order</button>
-                </div>
+                        <button type="submit">List order</button>
+                    </div>
                 </form>
                 <div class="col-4 logo">
                     <a href="index.jsp">DOTAI</a>
@@ -236,7 +236,8 @@
                 <ul>
                     <li><a href="page?pageId=aboutUs&&email=${email}">About Us</a></li>
                     <li><a href="productList?email=${email}">Products</a></li>
-                    <li><a href="page?pageId=aboutUs&&email=${email}">Sale</a></li>
+                    <li><a href="sale?email=${email}">Sale</a></li>
+
                     <li><a href="page?pageId=contact&&email=${email}">Contact</a></li>
                     <li><a href="page?pageId=customer&&email=${email}">Customer Service</a></li>
                     <li><a href="page?pageId=recruitment&&email=${email}">Recruitment</a></li>

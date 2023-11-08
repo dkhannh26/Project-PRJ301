@@ -34,6 +34,24 @@ public class DAOproduct extends connnectDB.connectDB {
         return list;
     }
     
+     public List<product> getAllSale() {
+        List<product> list = new ArrayList<>();
+        String sql = "select * from product where pro_sale >0";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                product p = new product(rs.getInt("type"), rs.getInt("pro_quan"), rs.getInt("pro_id"), rs.getString("pro_name"),
+                        rs.getInt("pro_sale"), rs.getInt("pro_price"), rs.getString("pro_pic"), rs.getString("pro_des"));
+                list.add(p);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
+    
      public List<product> getTop() {
         List<product> list = new ArrayList<>();
         String sql = "select * from product where type=0";

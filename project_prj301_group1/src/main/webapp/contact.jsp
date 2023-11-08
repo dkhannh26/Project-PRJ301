@@ -270,7 +270,9 @@
                 font-family: "SVN-Futura Medium", sans-serif;
             }
 
-
+            .none{
+                display: none;
+            }
         </style>
 
     </head>
@@ -293,8 +295,8 @@
                 <form action="addOrder" method="post">
                     <div  class="none col-1" ${stylee}>
 
-                  <button type="submit">List order</button>
-                </div>
+                        <button type="submit">List order</button>
+                    </div>
                 </form>
                 <div class="col-4 logo">
                     <a href="index.jsp">DOTAI</a>
